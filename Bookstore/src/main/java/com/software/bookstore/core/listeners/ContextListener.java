@@ -48,7 +48,6 @@ public class ContextListener implements ServletContextListener {
         setPrivateResources();
         setProps();
         setConnection();
-        
         System.out.println("Context Initialized");
     }
     
