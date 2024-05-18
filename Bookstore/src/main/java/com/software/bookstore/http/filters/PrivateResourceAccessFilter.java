@@ -12,9 +12,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.Set;
+import com.software.bookstore.core.base.context.AppContext;
 
-import com.software.bookstore.core.base.AppContext;
+import java.util.Set;
 
 @WebFilter("/*")
 public class PrivateResourceAccessFilter implements Filter {
@@ -27,10 +27,11 @@ public class PrivateResourceAccessFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
         Set<String> resources = AppContext.getInstance().getPrivateResources();
-        if(resources.contains(request.getRequestURI()))
+        if(resources.contains(request.getRequestURI())) {
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
-        chain.doFilter(request, response);
-
+        } else {
+            chain.doFilter(req, resp);
+        }
     }
 
     @Override
