@@ -29,7 +29,7 @@ import javax.servlet.annotation.WebListener;
 import com.software.bookstore.configs.Database;
 import com.software.bookstore.constants.PrivateRoute;
 import com.software.bookstore.constants.ResourceFile;
-import com.software.bookstore.core.base.AppContext;
+import com.software.bookstore.core.base.context.AppContext;
 import com.software.bookstore.exceptions.AppContextRealpathEmptyException;
 import com.software.bookstore.utils.Resources;
 
