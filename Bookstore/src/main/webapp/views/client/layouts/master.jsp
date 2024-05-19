@@ -19,7 +19,6 @@
         <!-- custom css -->
         <link rel="stylesheet" href="/public/css/variables.css">
         <title>${title}</title>
-
     </head>
     <body>
         <div class="overlay"></div>
