@@ -4,6 +4,9 @@
     Author     : thang
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<head>
+    <link rel="stylesheet" href="/public/css/footer.css">
+</head>
 <footer>
     <div class="container">
         <div class="row w-100">
