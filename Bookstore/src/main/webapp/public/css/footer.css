@@ -1,52 +1,57 @@
 ul > li {
-    list-style: none;
+  list-style: none;
 }
 
 .footer-items-list {
-    padding: 1rem 0 0;
+  padding: 1rem 0 0;
 }
 
 .footer-item,
 .footer-item a {
-    text-decoration: none;
-    color: #d3d3d3;
+  text-decoration: none;
+  color: #d3d3d3;
 }
 
 .footer-item a:hover {
-    color: #fff;
+  color: #fff;
 }
 
 footer {
-    background-color: #232323;
-    color: #fff;
-    padding: 1rem 1rem 0 1rem;
+  background-color: rgba(35, 35, 35, 0.9);
+  color: #fff;
+  padding: 1rem 1rem 0 1rem;
+}
+
+footer .branch-image {
+  width: 150px;
+  height: 150px;
 }
 
 .footer-outline-button {
-    width: 100%;
-    box-sizing: border-box;
-    border: 2px solid #fff;
-    background-color: transparent;
-    color: #fff;
-    padding: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #fff;
+  background-color: transparent;
+  color: #fff;
+  padding: 0.5rem;
 }
 
 .footer-outline-button:hover {
-    background-color: #ffffff4e;
+  background-color: #ffffff4e;
 }
 
 .mw-75 {
-    max-width: 75%;
+  max-width: 75%;
 }
 
 .icon-link {
-    padding: 0.5rem;
-    border-radius: 10px;
-    text-decoration: none;
-    background-color: #fff;
-    color: #232323;
+  padding: 0.5rem;
+  border-radius: 10px;
+  text-decoration: none;
+  background-color: #fff;
+  color: #232323;
 }
 
 .icon-link:hover {
-    background-color: #c3c3c3;
+  background-color: #c3c3c3;
 }
