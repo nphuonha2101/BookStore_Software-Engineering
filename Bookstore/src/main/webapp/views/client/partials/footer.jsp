@@ -1,114 +1,106 @@
-<%-- 
-    Document   : footer
-    Created on : May 19, 2024, 2:36:12 AM
-    Author     : thang
---%>
+<%-- Document : footer Created on : May 19, 2024, 2:36:12 AM Author : thang --%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <head>
-    <link rel="stylesheet" href="/public/css/footer.css">
+  <link rel="stylesheet" href="/public/css/footer.css" />
 </head>
-<footer>
-    <div class="container">
-        <div class="row w-100">
-            <div class="col-2">
-                <img
-                        src="https://www.facebook.com/images/fb_icon_325x325.png"
-                        alt="facebook"
-                        class="footer-icon"
-                />
-            </div>
+<footer class="pt-5">
+  <div class="container">
+    <div class="row w-100">
+      <div class="col mx-5 d-flex justify-content-center">
+        <img src="./logo.svg" alt="facebook" class="branch-image" />
+      </div>
 
-            <div class="col-1">
-                <strong>Category</strong>
-                <ul class="d-flex flex-column footer-items-list">
-                    <li class="footer-item">
-                        <a href="" target="_blank">Psychology </a>
-                    </li>
-                    <li class="footer-item">
-                        <a href="" target="_blank">Science </a>
-                    </li>
-                    <li class="footer-item">
-                        <a href="" target="_blank">History </a>
-                    </li>
-                    <li class="footer-item">
-                        <a href="" target="_blank">Fiction </a>
-                    </li>
-                </ul>
-            </div>
+      <div class="col">
+        <strong>Thể loại</strong>
+        <ul class="d-flex flex-column footer-items-list">
+          <li class="footer-item">
+            <a href="" target="_blank">Tâm lý học </a>
+          </li>
+          <li class="footer-item">
+            <a href="" target="_blank">Khoa học </a>
+          </li>
+          <li class="footer-item">
+            <a href="" target="_blank">Lịch sử </a>
+          </li>
+          <li class="footer-item">
+            <a href="" target="_blank">Viễn tưởng </a>
+          </li>
+        </ul>
+      </div>
 
-            <div class="col-1">
-                <strong>For kids</strong>
-                <ul class="d-flex flex-column footer-items-list">
-                    <li class="footer-item">
-                        <a href="" target="_blank">Game </a>
-                    </li>
-                    <li class="footer-item">
-                        <a href="" target="_blank">Comics </a>
-                    </li>
-                    <li class="footer-item">
-                        <a href="" target="_blank">Fairy tales </a>
-                    </li>
-                </ul>
-            </div>
+      <div class="col">
+        <strong>Dành cho trẻ</strong>
+        <ul class="d-flex flex-column footer-items-list">
+          <li class="footer-item">
+            <a href="" target="_blank">Trò chơi </a>
+          </li>
+          <li class="footer-item">
+            <a href="" target="_blank">Truyện tranh </a>
+          </li>
+          <li class="footer-item">
+            <a href="" target="_blank">Truyện cổ tích </a>
+          </li>
+        </ul>
+      </div>
 
-            <div class="col-1">
-                <strong>Ebooks</strong>
-                <ul class="d-flex flex-column footer-items-list">
-                    <li class="footer-item">
-                        <a href="" target="_blank">Theories </a>
-                    </li>
-                    <li class="footer-item">
-                        <a href="" target="_blank">Historical </a>
-                    </li>
-                </ul>
-            </div>
+      <div class="col">
+        <strong>Ebooks</strong>
+        <ul class="d-flex flex-column footer-items-list">
+          <li class="footer-item">
+            <a href="" target="_blank">Tiểu thuyết </a>
+          </li>
+          <li class="footer-item">
+            <a href="" target="_blank">Lịch sử </a>
+          </li>
+        </ul>
+      </div>
 
-            <div class="col-3">
-                <strong>Help and contact</strong>
-                <ul class="d-flex flex-column footer-items-list">
-                    <li class="footer-item">
-                        <i class="fa-solid fa-phone"></i> 0123456789
-                    </li>
-                    <li class="footer-item">
-                        <i class="fa-solid fa-clock"></i> 8:00 - 22:00 every day
-                    </li>
-                    <li class="footer-item">
-                        <i class="fa-solid fa-envelope"></i> lnbookstore@email.com
-                    </li>
-                </ul>
-            </div>
+      <div class="col-3">
+        <strong>Liên hệ và hỗ trợ</strong>
+        <ul class="d-flex flex-column footer-items-list">
+          <li class="footer-item">
+            <i class="fa-solid fa-phone"></i> 0123456789
+          </li>
+          <li class="footer-item">
+            <i class="fa-solid fa-clock"></i> 8:00 - 22:00 hằng ngày
+          </li>
+          <li class="footer-item">
+            <i class="fa-solid fa-envelope"></i> lnbookstore@email.com
+          </li>
+        </ul>
+      </div>
 
-            <div class="col-3">
-                <div class="mw-75">
-                    <p>
-                        If you have any questions, you can contact us or we will do it
-                        for you.
-                    </p>
-                    <button class="footer-outline-button">Request a call</button>
-                </div>
-            </div>
+      <div class="col-3 d-flex justify-content-center">
+        <div class="mw-75">
+          <p>
+            Nếu bạn có bất kỳ câu hỏi nào, bạn có thể liên hệ với chúng tôi,
+            chúng tôi sẽ giúp bạn.
+          </p>
+          <button class="footer-outline-button">Gửi yêu cầu hỗ trợ</button>
         </div>
-
-        <div class="row mt-4 mb-4">
-            <div class="col-6">
-                <a href="www.facebook.com" target="_blank" class="icon-link">
-                    <i class="fa-brands fa-facebook"></i>
-                </a>
-
-                <a href="www.instagram.com" target="_blank" class="icon-link">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-
-                <a href="www.x.com" class="icon-link">
-                    <i class="fa-brands fa-x-twitter"></i>
-                </a>
-            </div>
-        </div>
+      </div>
     </div>
-    <div class="container-fluid">
-        <div class="w-100 text-center p-3 border-top">
-            &copy; 2024 TL BookStore by Tran Thang Loi and Nguyen Phuong Nha.
-            All rights reserved!
-        </div>
+
+    <div class="row mt-4 mb-4">
+      <div class="col-6">
+        <a href="www.facebook.com" target="_blank" class="icon-link">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+
+        <a href="www.instagram.com" target="_blank" class="icon-link">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+
+        <a href="www.x.com" class="icon-link">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+      </div>
     </div>
+  </div>
+  <div class="container-fluid mt-5">
+    <div class="w-100 text-center p-3 border-top">
+      &copy; 2024 <strong>TL BookStore</strong> do Trần Thắng Lợi và Nguyễn
+      Phương Nhã. Mọi quyền được bảo lưu!
+    </div>
+  </div>
 </footer>
