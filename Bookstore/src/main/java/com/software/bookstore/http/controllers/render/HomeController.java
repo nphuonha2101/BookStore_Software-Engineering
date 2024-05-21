@@ -1,4 +1,4 @@
-package com.software.bookstore.http.controllers;
+package com.software.bookstore.http.controllers.render;
 
 import java.io.IOException;
 
