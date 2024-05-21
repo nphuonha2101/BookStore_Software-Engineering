@@ -1,6 +1,6 @@
 <%-- 
-    Document   : master
-    Created on : May 19, 2024, 2:16:00 AM
+    Document   : blank
+    Created on : May 21, 2024, 6:41:49 PM
     Author     : thang
 --%>
 
@@ -24,11 +24,8 @@
         <title>${title}</title>
     </head>
     <body>
-        <div class="overlay"></div>
-        <%@include file="/views/client/partials/header.jsp" %>
         <main>
             <jsp:include page="${page}"/>
         </main>
-        <%@include file="/views/client/partials/footer.jsp" %>
     </body>
 </html>
