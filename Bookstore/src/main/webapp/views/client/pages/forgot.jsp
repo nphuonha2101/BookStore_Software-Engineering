@@ -20,7 +20,7 @@
 
                     <form action="/auth/forgot" id="forgotForm" method="POST">
                         <div class="form-group my-3">
-                            <input type="email" class="form-forgot-control" id="email" name="email" placeholder="Email">
+                            <input type="email" class="form-forgot-control" id="email" name="email" placeholder="Email" required>
                         </div>
                         <button type="submit" class="d-block w-100 btn-auth-main">Đăng nhập</button>
                     </form>

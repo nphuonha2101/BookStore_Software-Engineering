@@ -21,10 +21,10 @@
 
                     <form action="/auth/login" id="loginForm" method="POST">
                         <div class="form-group my-3">
-                            <input type="email" class="form-login-control" id="email" name="email" placeholder="Email">
+                            <input type="email" class="form-login-control" id="email" name="email" placeholder="Email" required>
                         </div>
                         <div class="form-group my-3">
-                            <input type="password" class="form-login-control" id="password" name="password" placeholder="Mật khẩu">
+                            <input type="password" class="form-login-control" id="password" name="password" placeholder="Mật khẩu" required>
                         </div>
 
                         <div class="form-group my-3 d-flex justify-content-between align-items-center">
