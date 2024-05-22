@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <head>
-    <link rel="stylesheet" href="/public/css/login.css">
+    <link rel="stylesheet" href="/public/css/auth.css">
 </head>
 <div id="loginPage">
     <div class="row g-0" style="height: 100vh;">
@@ -52,7 +52,7 @@
     
                     <p class="description text-white">Xin vui lòng đăng nhập vào tài khoản của bạn để có thể có những trải nghiệm mua và đọc sách tốt nhất tại đây.</p>
 
-                    <button class="btn-auth-main" style="border-radius: 8px;">Đăng ký tài khoản mới</button>
+                    <a href="/register" class="btn-auth-main text-decoration-none" style="border-radius: 8px;">Đăng ký tài khoản mới</a>
                 </div>
             </section>
         </div>  

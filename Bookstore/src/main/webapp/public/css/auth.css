@@ -2,7 +2,11 @@ body {
     background-color: var(--login-body-background);
 }
 
-.form-login-control {
+#registerPageLeft, #forgotPageLeft {
+    width: 450px;
+}
+
+.form-login-control, .form-register-control, .form-forgot-control {
     padding: 16px;
     border-radius: 30px;
     border: none;
@@ -22,7 +26,7 @@ body {
     color: #8d867c;
 }
 
-#loginPageRight {
+#loginPageRight, #registerPageRight, #forgotPageRight {
     height: 100vh;
     background-image: url('/public/imgs/backgrounds/login-right.jpg');
     background-repeat: no-repeat;
@@ -35,7 +39,7 @@ body {
     position: relative;
 }
 
-#loginPageRight::after {
+#loginPageRight::after, #registerPageRight::after, #forgotPageRight::after {
     content: '';
     position: absolute;
     width: 300px;
@@ -46,9 +50,10 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 3;
+    pointer-events: none;
 }
 
-#loginPageRightContent {
+#loginPageRightContent, #registerPageRightContent, #forgotPageRightContent {
     width: 400px;
     transform: translateX(30px);
 }
@@ -64,7 +69,7 @@ body {
 }
 
 @media (max-width: 1200px) {
-    #loginPageContent {
+    #loginPageContent, #registerPageContent {
         width: 80%;
         transform: translateX(0);
     }
