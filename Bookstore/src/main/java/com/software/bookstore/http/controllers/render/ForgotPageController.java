@@ -1,4 +1,4 @@
-package com.software.bookstore.http.controllers;
+package com.software.bookstore.http.controllers.render;
 
 import java.io.IOException;
 
@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.software.bookstore.core.base.page.APage;
 import com.software.bookstore.core.base.page.ClientPage;
 
-@WebServlet("/home")
-public class HomeController extends HttpServlet {
+@WebServlet("/forgot-password")
+public class ForgotPageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        APage page = new ClientPage(req, resp, "home.jsp", "master.jsp");
-        page.setTitle("Trang chủ");
+        APage page = new ClientPage(req, resp, "forgot.jsp", "blank.jsp");
+        page.setTitle("Quên mật khẩu");
         page.render();
     }
 }
