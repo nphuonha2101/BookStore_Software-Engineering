@@ -5,3 +5,6 @@ db.password=
 db.driver=
 
 app.version=
+
+mail.appName=filmbookingdn@gmail.com
+mail.appPassword=bzsr bhhg evvo crmq

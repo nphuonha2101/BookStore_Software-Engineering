@@ -1,6 +1,5 @@
 package com.software.bookstore.mail;
 
-import com.software.bookstore.configs.Mail;
 import com.software.bookstore.utils.Files;
 
 import javax.mail.*;
@@ -10,27 +9,31 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.util.Properties;
 
-public class SendMail {
-    private static SendMail instance;
-    private Properties mailProperties;
+public class Mail {
+    private static Mail instance;
+    private static Properties mailProperties;
 
-    private SendMail() {
+    private Mail() {
         mailProperties = new Properties();
         mailProperties.put("mail.smtp.auth", "true");
-        mailProperties.put("mail.smtp.host", Mail.HOST);
-        mailProperties.put("mail.smtp.socketFactory.port", Mail.SSL_PORT);
+        mailProperties.put("mail.smtp.host", com.software.bookstore.configs.Mail.HOST);
+        mailProperties.put("mail.smtp.socketFactory.port", com.software.bookstore.configs.Mail.SSL_PORT);
         mailProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        mailProperties.put("mail.smtp.port", Mail.SSL_PORT);
+        mailProperties.put("mail.smtp.port", com.software.bookstore.configs.Mail.SSL_PORT);
     }
 
-    public static SendMail getInstance() {
+    private static void getInstance() {
         if (instance == null) {
-            instance = new SendMail();
+            instance = new Mail();
         }
-        return instance;
     }
 
-    private Session authenticate() {
+    /**
+     * This method is used to authenticate the email account.
+     *
+     * @return A session object that represents the authenticated email account.
+     */
+    private static Session authenticate() {
 
         String appName = Files.env("mail.appName");
         String appPassword = Files.env("mail.appPassword");
@@ -51,7 +54,9 @@ public class SendMail {
      * @param contentType The content type of the email. This is a string that describes the format of the email content (e.g., "text/html").
      * @throws RuntimeException If an error occurs during the sending of the email, a RuntimeException will be thrown.
      */
-    public void sendTo(String to, String subject, String content, String contentType) {
+    public static void sendTo(String to, String subject, String content, String contentType) {
+        getInstance();
+
         try {
             // create a message and set the recipients, subject
             MimeMessage mimeMessage = new MimeMessage(authenticate());
