@@ -1,7 +1,7 @@
 package com.software.bookstore.mail;
 
 import com.software.bookstore.configs.Mail;
-import com.software.bookstore.utils.AppProperties;
+import com.software.bookstore.utils.Files;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -31,9 +31,9 @@ public class SendMail {
     }
 
     private Session authenticate() {
-        AppProperties appProperties = AppProperties.getInstance();
-        String appName = appProperties.getProperty("mail.appName");
-        String appPassword = appProperties.getProperty("mail.appPassword");
+
+        String appName = Files.env("mail.appName");
+        String appPassword = Files.env("mail.appPassword");
 
         return Session.getInstance(mailProperties, new javax.mail.Authenticator() {
             protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
@@ -51,7 +51,7 @@ public class SendMail {
      * @param contentType The content type of the email. This is a string that describes the format of the email content (e.g., "text/html").
      * @throws RuntimeException If an error occurs during the sending of the email, a RuntimeException will be thrown.
      */
-    public void sendMail(String to, String subject, String content, String contentType) {
+    public void sendTo(String to, String subject, String content, String contentType) {
         try {
             // create a message and set the recipients, subject
             MimeMessage mimeMessage = new MimeMessage(authenticate());
