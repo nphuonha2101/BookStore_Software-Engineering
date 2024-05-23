@@ -45,9 +45,9 @@ public class SendMail {
     /**
      * This method is used to email a user.
      *
-     * @param to The email address of the recipient. This should be a valid email address.
-     * @param subject The subject of the email. This is a string that describes the main content of the email.
-     * @param content The content of the email. This is a string containing the detailed information you want to send.
+     * @param to          The email address of the recipient. This should be a valid email address.
+     * @param subject     The subject of the email. This is a string that describes the main content of the email.
+     * @param content     The content of the email. This is a string containing the detailed information you want to send.
      * @param contentType The content type of the email. This is a string that describes the format of the email content (e.g., "text/html").
      * @throws RuntimeException If an error occurs during the sending of the email, a RuntimeException will be thrown.
      */
@@ -60,11 +60,13 @@ public class SendMail {
 
             // create the message part
             MimeBodyPart mimeBodyPart = new MimeBodyPart();
+            // set the content of the message part
             mimeBodyPart.setContent(content, contentType + "; charset=utf-8");
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(mimeBodyPart);
-            // set the content
-            mimeMessage.setContent(multipart, "text/html; charset=utf-8");
+
+            // set the content of the message
+            mimeMessage.setContent(multipart, contentType + "; charset=utf-8");
 
             Transport.send(mimeMessage);
             System.out.println("Sent mail successfully");
