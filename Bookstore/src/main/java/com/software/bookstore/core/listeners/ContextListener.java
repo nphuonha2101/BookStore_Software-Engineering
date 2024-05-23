@@ -35,7 +35,6 @@ import com.software.bookstore.utils.Resources;
 
 @WebListener
 public class ContextListener implements ServletContextListener {
-
     @Override
     public void contextDestroyed(ServletContextEvent event) {
         AppContext.destroyInstance();
