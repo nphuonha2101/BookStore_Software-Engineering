@@ -13,15 +13,95 @@ public class JsonFactory {
         return json;
     }
 
-    public static String success(String message, Object data) {
-        return getJsonResponse(EResponseCode.SUCCESS, message, data);
+    public static abstract class ResponseType {
+
+        protected EResponseCode code;
+        protected String message;
+        protected Object data;
+
+        public ResponseType() {}
+
+        public ResponseType(String message) {
+            this.message = message;
+        }
+
+        public ResponseType(Object data) {
+            this.data = data;
+        }
+
+        public ResponseType(String message, Object data) {
+            this.message = message;
+            this.data = data;
+        }
+
+        public String build() {
+            return getJsonResponse(this.code, this.message, this.data);
+        }
     }
 
-    public static String notFound(String message, Object data) {
-        return getJsonResponse(EResponseCode.NOT_FOUND, message, data);
+    public static class Success extends ResponseType {
+
+        public Success() {
+            this.code = EResponseCode.SUCCESS;
+        }
+
+        public Success(Object data) {
+            super(data);
+            this.code = EResponseCode.SUCCESS;
+        }
+
+        public Success(String message, Object data) {
+            super(message, data);
+            this.code = EResponseCode.SUCCESS;
+        }
+
+        public Success(String message) {
+            super(message);
+            this.code = EResponseCode.SUCCESS;
+        }
     }
 
-    public static String unauthorized(String message, Object data) {
-        return getJsonResponse(EResponseCode.UNAUTHORIZED, message, data);
+    public static class Unauthorized extends ResponseType {
+
+        public Unauthorized() {
+            this.code = EResponseCode.UNAUTHORIZED;
+        }
+
+        public Unauthorized(String message) {
+            super(message);
+            this.code = EResponseCode.UNAUTHORIZED;
+        }
+
+        public Unauthorized(Object data) {
+            super(data);
+            this.code = EResponseCode.UNAUTHORIZED;
+        }
+
+        public Unauthorized(String message, Object data) {
+            super(message, data);
+            this.code = EResponseCode.UNAUTHORIZED;
+        }
+    }
+
+    public static class NotFound extends ResponseType {
+
+        public NotFound() {
+            this.code = EResponseCode.NOT_FOUND;
+        }
+
+        public NotFound(String message) {
+            super(message);
+            this.code = EResponseCode.NOT_FOUND;
+        }
+
+        public NotFound(Object data) {
+            super(data);
+            this.code = EResponseCode.NOT_FOUND;
+        }
+
+        public NotFound(String message, Object data) {
+            super(message, data);
+            this.code = EResponseCode.NOT_FOUND;
+        }
     }
 }
