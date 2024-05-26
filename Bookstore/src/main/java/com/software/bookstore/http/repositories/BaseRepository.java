@@ -51,6 +51,36 @@ public abstract class BaseRepository<T> {
         return models;
     }
 
+    public List<T> findAllWithOffsetAndLimit(int offset, int limit) {
+        Connection connection = AppContext.getInstance().getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<T> models = null;
+        try {
+            String query = "SELECT * FROM " + table + " LIMIT ? OFFSET ?";
+            stmt = connection.prepareStatement(query);
+            stmt.setInt(1, limit);
+            stmt.setInt(2, offset);
+            rs = stmt.executeQuery();
+            models = new ArrayList<>();
+            while(rs.next())
+                models.add(mapResultSetToModel(rs));
+            return models;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(rs != null)
+                    rs.close();
+                if(stmt != null)
+                    stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return models;
+    }
+
     public T findById(int id) {
         Connection connection = AppContext.getInstance().getConnection();
         PreparedStatement stmt = null;
@@ -165,6 +195,33 @@ public abstract class BaseRepository<T> {
             }
         }
         return false;
+    }
+
+    public long getCount() {
+        Connection connection = AppContext.getInstance().getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        long count = 0;
+        try {
+            String query = "SELECT COUNT(*) FROM " + table;
+            stmt = connection.prepareStatement(query);
+            rs = stmt.executeQuery();
+            if (rs.next())
+                count = rs.getLong(1);
+            return count;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(rs != null)
+                    rs.close();
+                if(stmt != null)
+                    stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return count;
     }
 
     protected abstract T mapResultSetToModel(ResultSet rs) throws SQLException;
