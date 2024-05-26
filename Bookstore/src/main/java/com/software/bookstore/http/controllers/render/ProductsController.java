@@ -21,8 +21,8 @@ public class ProductsController extends HttpServlet {
         APage productsPage = new ClientPage(req, resp, "products.jsp", "master.jsp");
 
         productsPage.setTitle("Danh sách sản phẩm");
-        Pagination<Book> pagination = new Pagination<>(bookService, 5, req);
-        productsPage.setObject("products", pagination.getPaginatedList(5));
+        Pagination<Book> pagination = new Pagination<>(bookService, 8, req);
+        productsPage.setObject("products", pagination.getPaginatedList());
         productsPage.render();
 
 

@@ -35,8 +35,8 @@ public class BookRepository extends BaseRepository<Book> {
                 rs.getString("img"),
                 rs.getDouble("price"),
                 rs.getString("isbn"),
-                categoryRepository.findAll(rs.getInt("id")
-                ));
+                categoryRepository.findAll(rs.getInt("id"))
+        );
     }
 
     @Override

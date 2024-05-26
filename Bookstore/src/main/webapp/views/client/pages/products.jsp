@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center">Danh sách sản phẩm</h1>
+                <h1 class="text-center my-5">Danh sách sản phẩm</h1>
             </div>
         </div>
         <div class="row justify-content-between">
