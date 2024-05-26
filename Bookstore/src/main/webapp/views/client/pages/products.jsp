@@ -22,7 +22,7 @@
             <c:forEach var="product" items="${products}">
                 <c:set var="firstCategory" value="${product.categories[0]}"/>
                 <div class="card h-100 col-lg-2 col-md-5 col-sm-11 my-3 mx-2 product-card">
-                    <div class="title-tag">
+                    <div class="category-tag">
                         <span class="badge bg-primary">${firstCategory.name}</span>
                     </div>
                     <img src="${pageContext.request.contextPath}/R.jpg" class="card-img-top" alt="Bìa sách">
