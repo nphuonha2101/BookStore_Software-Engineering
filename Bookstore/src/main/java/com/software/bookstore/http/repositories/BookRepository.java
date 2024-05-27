@@ -1,14 +1,11 @@
 package com.software.bookstore.http.repositories;
 
-import com.software.bookstore.core.base.context.AppContext;
-import com.software.bookstore.http.models.Book;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.software.bookstore.http.models.Book;
 
 public class BookRepository extends BaseRepository<Book> {
     public BookRepository(String table) {

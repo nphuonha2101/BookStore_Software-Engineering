@@ -96,9 +96,9 @@
         <div class="container">
             <div class="d-md-flex d-none justify-content-between align-items-center">
                 <ul class="header-bottom-nav list-unstyled d-flex gap-3 align-items-center m-0">
-                    <li><a href="" class="text-decoration-none text-dark">Trang chủ</a></li>
+                    <li><a href="/home" class="text-decoration-none text-dark">Trang chủ</a></li>
                     <li><a href="" class="text-decoration-none text-dark">Giới thiệu</a></li>
-                    <li><a href="" class="text-decoration-none text-dark">Thư viện</a></li>
+                    <li><a href="/products" class="text-decoration-none text-dark">Thư viện</a></li>
                     <li><a href="" class="text-decoration-none text-dark">Liên hệ</a></li>
                 </ul>
     

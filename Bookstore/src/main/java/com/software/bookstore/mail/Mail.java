@@ -16,10 +16,10 @@ public class Mail {
     private Mail() {
         mailProperties = new Properties();
         mailProperties.put("mail.smtp.auth", "true");
-        mailProperties.put("mail.smtp.host", com.software.bookstore.configs.Mail.HOST);
-        mailProperties.put("mail.smtp.socketFactory.port", com.software.bookstore.configs.Mail.SSL_PORT);
+        mailProperties.put("mail.smtp.host", com.software.bookstore.configs.MailConfig.HOST);
+        mailProperties.put("mail.smtp.socketFactory.port", com.software.bookstore.configs.MailConfig.SSL_PORT);
         mailProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        mailProperties.put("mail.smtp.port", com.software.bookstore.configs.Mail.SSL_PORT);
+        mailProperties.put("mail.smtp.port", com.software.bookstore.configs.MailConfig.SSL_PORT);
     }
 
     private static void getInstance() {

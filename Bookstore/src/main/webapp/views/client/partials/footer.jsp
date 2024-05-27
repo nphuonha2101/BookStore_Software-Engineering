@@ -3,7 +3,7 @@
 <head>
   <link rel="stylesheet" href="/public/css/footer.css" />
 </head>
-<footer class="pt-5">
+<footer class="pt-5 mt-5">
   <div class="container">
     <div class="row w-100">
       <div class="col mx-5 d-flex justify-content-center">
