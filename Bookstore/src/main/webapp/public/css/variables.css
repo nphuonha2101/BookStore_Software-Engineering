@@ -54,6 +54,12 @@
     border-radius: 8px;
 }
 
+.bg-main {
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 8px;
+}
+
 .btn-auth-main {
     border-radius: 30px;
     padding: 16px;
