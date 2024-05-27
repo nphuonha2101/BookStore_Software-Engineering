@@ -23,9 +23,6 @@
                             <input type="email" class="form-register-control" id="email" name="email" placeholder="Email" required>
                         </div>
                         <div class="form-group my-3">
-                            <input type="password" class="form-register-control" id="password" name="password" placeholder="Mật khẩu" required>
-                        </div>
-                        <div class="form-group my-3">
                             <input type="text" class="form-register-control" id="fullname" name="fullname" placeholder="Họ và tên" required>
                         </div>
                         <div class="form-group my-3">
@@ -34,6 +31,12 @@
                         <div class="form-group my-3">
                             <label for="#birtdate">Ngày sinh</label>
                             <input type="date" class="form-register-control mt-2" id="birthday" name="birthday" placeholder="Ngày sinh" required>
+                        </div>
+                        <div class="form-group my-3">
+                            <input type="password" class="form-register-control" id="password" name="password" placeholder="Mật khẩu" required>
+                        </div>
+                        <div class="form-group my-3">
+                            <input type="password" class="form-register-control" id="password" name="passwordConfirmation" placeholder="Nhập lại mật khẩu" required>
                         </div>
                         <button type="submit" class="d-block w-100 btn-auth-main">Đăng ký</button>
                     </form>

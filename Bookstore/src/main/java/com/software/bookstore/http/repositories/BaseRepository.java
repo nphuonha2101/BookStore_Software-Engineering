@@ -224,6 +224,34 @@ public abstract class BaseRepository<T> {
         return count;
     }
 
+    public T query(String sql, Object ... params) {
+        Connection connection = AppContext.getInstance().getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        T model = null;
+        try {
+            stmt = connection.prepareStatement(sql);
+            for(int i = 0; i < params.length; i++)
+                stmt.setObject(i + 1, params[i]);
+            rs = stmt.executeQuery();
+            if(rs.next())
+                model = mapResultSetToModel(rs);
+            return model;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(rs != null)
+                    rs.close();
+                if(stmt != null)
+                    stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return model;
+    }
+
     protected abstract T mapResultSetToModel(ResultSet rs) throws SQLException;
     protected abstract Map<String, Object> mapModelToParams(T model);
 }

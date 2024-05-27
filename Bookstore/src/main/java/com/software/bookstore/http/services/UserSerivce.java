@@ -43,5 +43,9 @@ public class UserSerivce implements IService<User> {
     public boolean delete(int id) {
         return repository.delete(id);
     }
+
+    public User findByEmail(String email) {
+        return repository.query("SELECT * FROM " + repository.getTable() + " WHERE EMAIL = ?", email);
+    }
     
 }
