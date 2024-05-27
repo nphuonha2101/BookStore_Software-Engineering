@@ -1,13 +1,12 @@
 package com.software.bookstore.http.services;
 
+import com.software.bookstore.http.models.Category;
+import com.software.bookstore.http.repositories.CategoryRepository;
+
 import java.util.List;
 
-import com.software.bookstore.http.models.User;
-import com.software.bookstore.http.repositories.UserRepository;
-
-public class UserSerivce implements IService<User> {
-
-    private final UserRepository repository = new UserRepository("users");
+public class CategoryService implements IService<Category>{
+    private final CategoryRepository repository = new CategoryRepository("categories");
 
     @Override
     public long count() {
@@ -15,27 +14,27 @@ public class UserSerivce implements IService<User> {
     }
 
     @Override
-    public List<User> findAllWithOffsetAndLimit(int offset, int limit) {
+    public List<Category> findAllWithOffsetAndLimit(int offset, int limit) {
         return repository.findAllWithOffsetAndLimit(offset, limit);
     }
 
     @Override
-    public List<User> findAll() {
+    public List<Category> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public User findById(int id) {
+    public Category findById(int id) {
         return repository.findById(id);
     }
 
     @Override
-    public User save(User model) {
+    public Category save(Category model) {
         return repository.save(model);
     }
 
     @Override
-    public User update(User model) {
+    public Category update(Category model) {
         return repository.update(model);
     }
 
@@ -43,5 +42,4 @@ public class UserSerivce implements IService<User> {
     public boolean delete(int id) {
         return repository.delete(id);
     }
-    
 }
