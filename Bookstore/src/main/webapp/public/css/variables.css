@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --navbar-text: #7B7881;
+    --main-color: #937DC2;
+    --sub-color: #C689C6;
+    --search-background: #f1f1f1;
+    --main-auth-color: #ffa637;
+    --login-body-background: #eef1f6;
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transform: all .3s;
+}
+
+.overlay.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.text-navbar {
+    color: var(--navbar-text);
+}
+
+.text-main {
+    color: var(--main-color);
+}
+
+.text-auth-main {
+    color: var(--main-auth-color);
+}
+
+.text-sub {
+    color: var(--sub-color);
+}
+
+.bg-main-outline {
+    background-color: white;
+    color: var(--main-color);
+    border: 2px solid var(--main-color);
+    border-radius: 8px;
+}
+
+.bg-main {
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 8px;
+}
+
+.btn-auth-main {
+    border-radius: 30px;
+    padding: 16px;
+    text-align: center;
+    background-color: var(--main-auth-color);
+    color: #FFF;
+    border: none;
+    outline: none;
+    transition: all .3s;
+}
+
+.btn-auth-main:hover {
+    background-color: #ed972c;
+}

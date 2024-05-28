@@ -29,13 +29,12 @@ import javax.servlet.annotation.WebListener;
 import com.software.bookstore.configs.Database;
 import com.software.bookstore.constants.PrivateRoute;
 import com.software.bookstore.constants.ResourceFile;
-import com.software.bookstore.core.base.AppContext;
+import com.software.bookstore.core.base.context.AppContext;
 import com.software.bookstore.exceptions.AppContextRealpathEmptyException;
 import com.software.bookstore.utils.Resources;
 
 @WebListener
 public class ContextListener implements ServletContextListener {
-
     @Override
     public void contextDestroyed(ServletContextEvent event) {
         AppContext.destroyInstance();
@@ -48,7 +47,6 @@ public class ContextListener implements ServletContextListener {
         setPrivateResources();
         setProps();
         setConnection();
-        
         System.out.println("Context Initialized");
     }
     

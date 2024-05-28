@@ -4,7 +4,7 @@
  * Lớp `AppContext` được sử dụng như một singleton, chỉ có một phiên bản duy nhất trong suốt thời gian chạy của ứng dụng.
  * Các lớp khác trong gói `com.software.bookstore.core.base` có thể sử dụng lớp `AppContext` để truy cập và sử dụng các thông tin chung của ứng dụng.
  */
-package com.software.bookstore.core.base;
+package com.software.bookstore.core.base.context;
 
 import java.sql.Connection;
 import java.util.Properties;

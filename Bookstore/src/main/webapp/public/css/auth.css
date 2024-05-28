@@ -1,0 +1,76 @@
+body {
+    background-color: var(--login-body-background);
+}
+
+#registerPageLeft, #forgotPageLeft, #resetPageLeft {
+    width: 450px;
+}
+
+.form-login-control, .form-register-control, .form-forgot-control, .form-reset-control {
+    padding: 16px;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    background-color: #FFF;
+    display: block;
+    width: 100%;
+}
+
+#forgotPassword {
+    text-decoration: none;
+    color: #55514B;
+    transition: all .3s;
+}
+
+#forgotPassword:hover {
+    color: #8d867c;
+}
+
+#loginPageRight, #registerPageRight, #forgotPageRight, #resetPageRight {
+    height: 100vh;
+    background-image: url('/public/imgs/backgrounds/login-right.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#loginPageRight::after, #registerPageRight::after, #forgotPageRight::after, #resetPageRight::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    left: 0;
+    background-image: url('/public/imgs/backgrounds/separator.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 3;
+    pointer-events: none;
+}
+
+#loginPageRightContent, #registerPageRightContent, #forgotPageRightContent, #resetPageRightContent {
+    width: 400px;
+    transform: translateX(30px);
+}
+
+.back-to-home {
+    text-decoration: none;
+    padding: 8px 16px;
+    color: #FFF;
+    position: absolute;
+    top: 190px;
+    left: 15%;
+    z-index: 5;
+}
+
+@media (max-width: 1200px) {
+    #loginPageContent, #registerPageContent, #forgotPageContent, #resetPageContent {
+        width: 80%;
+        transform: translateX(0);
+    }
+}
