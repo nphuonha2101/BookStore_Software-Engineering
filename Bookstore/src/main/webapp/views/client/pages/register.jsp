@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <link rel="stylesheet" href="/public/css/auth.css">
 </head>
@@ -13,6 +14,9 @@
         <div class="col-md col-12 h-100">
             <div class="d-flex h-100 justify-content-center align-items-center">
                 <section id="registerPageLeft">
+                    <c:if test="${not empty registerMessage}">
+                        <div class="alert alert-danger">${registerMessage}</div>
+                    </c:if>
                     <div class="text-center">
                         <h1>B-World</h1>
                         <p class="fs-3">Đăng ký tài khoản mới</p>

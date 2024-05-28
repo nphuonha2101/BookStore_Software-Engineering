@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.software.bookstore.core.base.page.APage;
 import com.software.bookstore.core.base.page.ClientPage;
@@ -15,8 +16,13 @@ import com.software.bookstore.core.base.page.ClientPage;
 public class RegisterPageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
         APage page = new ClientPage(req, resp, "register.jsp", "blank.jsp");
+        if(session.getAttribute("registerMessage") != null)
+            page.setObject("registerMessage", session.getAttribute("loginMessage"));
         page.setTitle("Đăng ký");
         page.render();
+        session.removeAttribute("registerMessage");
+        page.removeObject("registerMessage");
     }
 }
