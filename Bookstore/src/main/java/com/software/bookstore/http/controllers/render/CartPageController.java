@@ -18,7 +18,7 @@ import com.software.bookstore.http.services.CartDetailService;
 import com.software.bookstore.utils.SessionAlert;
 
 @WebServlet("/cart")
-public class CartController extends HttpServlet {
+public class CartPageController extends HttpServlet {
 
     private final CartDetailService cartDetailService = new CartDetailService();
 

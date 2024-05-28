@@ -61,7 +61,7 @@
                                 </table>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h3>Total: <fmt:formatNumber
+                                        <h3 class="text-danger">Total: <fmt:formatNumber
                                             value="${total}"
                                             type="currency"
                                             currencySymbol="₫"
@@ -70,7 +70,15 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="<c:url value='/checkout'/>" class="btn btn-primary">Thanh toán</a>
+                                        <form action="/checkout/cash" method="POST">
+                                            <input type="hidden" name="total" value="${total}">
+                                            <button type="submit" class="btn btn-primary">Thanh toán bằng tiền mặt</button>
+                                        </form>
+
+                                        <form action="/checkout/vnpay" method="POST" class="mt-3">
+                                            <input type="hidden" name="total" value="${total}">
+                                            <button type="submit" class="btn btn-warning">Thanh toán với VNPAY</button>
+                                        </form>
                                     </div>
                                 </div>
                             </c:when>

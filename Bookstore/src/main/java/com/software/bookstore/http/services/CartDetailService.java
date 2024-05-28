@@ -56,5 +56,9 @@ public class CartDetailService implements IService<CartDetail> {
     public boolean deleteByCartIdAndBookId(int cartId, int bookId) {
         return repository.deleteByCartIdAndBookId(cartId, bookId);
     }
+
+    public boolean deleteByCartId(int cartId) {
+        return repository.update("DELETE FROM " + repository.getTable() + " WHERE cart_id = ?", cartId);
+    }
     
 }
