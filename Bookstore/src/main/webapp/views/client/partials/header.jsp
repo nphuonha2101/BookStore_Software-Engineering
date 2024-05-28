@@ -14,8 +14,7 @@
                 <div class="col-lg-2 col-md-3 col-3">
                     <div class="logo">
                         <a href="/">
-                            <object class="w-100" data="/public/imgs/logo/logo.svg"
-                                    type="image/svg+xml"></object>
+                            <img src="/public/imgs/logo/logo.svg" class="w-100" alt="Logo">                            
                         </a>
                     </div>
                 </div>
