@@ -1,5 +1,7 @@
 package com.software.bookstore.http.services;
 
+import com.software.bookstore.http.models.Book;
+
 import java.util.List;
 
 public interface IService<T> {
