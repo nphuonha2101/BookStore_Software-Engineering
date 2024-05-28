@@ -73,6 +73,15 @@ public class CartActionController extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        int bookId = Integer.parseInt(req.getParameter("bookId"));
+        HttpSession session = req.getSession();
+        User loginUser = (User) session.getAttribute("loginUser");
+        boolean isDelete = cartDetailService.deleteByCartIdAndBookId(loginUser.getCart().getId(), bookId);
+        if(isDelete) {
+            SessionAlert.setMessage(session, "Xóa khỏi giỏ hàng thành công", "success");
+        } else {
+            SessionAlert.setMessage(session, "Xóa khỏi giỏ hàng thất bại", "danger");
+        }
+        resp.sendRedirect("/cart");
     }
 }

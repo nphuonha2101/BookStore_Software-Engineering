@@ -52,5 +52,9 @@ public class CartDetailService implements IService<CartDetail> {
     public List<CartDetail> findByCartId(int cartId) {
         return repository.findByCartId(cartId);
     }
+
+    public boolean deleteByCartIdAndBookId(int cartId, int bookId) {
+        return repository.deleteByCartIdAndBookId(cartId, bookId);
+    }
     
 }

@@ -49,5 +49,10 @@ public class CartDetailRepository extends BaseRepository<CartDetail>{
         }
         return models;
     }
+
+    public boolean deleteByCartIdAndBookId(int cartId, int bookId) {
+        String sql = "DELETE FROM " + getTable() + " WHERE cart_id = ? AND book_id = ?";
+        return update(sql, cartId, bookId);
+    }
     
 }

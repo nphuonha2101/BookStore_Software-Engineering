@@ -15,6 +15,7 @@ import com.software.bookstore.core.base.page.ClientPage;
 import com.software.bookstore.http.models.CartDetail;
 import com.software.bookstore.http.models.User;
 import com.software.bookstore.http.services.CartDetailService;
+import com.software.bookstore.utils.SessionAlert;
 
 @WebServlet("/cart")
 public class CartController extends HttpServlet {
@@ -34,7 +35,15 @@ public class CartController extends HttpServlet {
             }
             page.setObject("cartDetails", cartDetails);
         }
+        
         page.setTitle("Giỏ hàng");
+
+        String[] messageAlert = SessionAlert.getMessage(session);
+        page.setObject("message", messageAlert[0]);
+        page.setObject("alertType", messageAlert[1]);
         page.render();
+
+        page.removeObject("message");
+        page.removeObject("alertType");
     }
 }

@@ -9,6 +9,12 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div id="cartPage">
     <div class="container">
+        <c:if test="${not empty message}">
+            <div class="alert alert-${alertType} alert-dismissible fade show" role="alert">
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </c:if>
         <c:choose>
             <c:when test="${not empty sessionScope.loginUser}">
                 <div class="row">
@@ -18,10 +24,10 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Product</th>
-                                            <th>Price</th>
-                                            <th>Quantity</th>
-                                            <th>Total</th>
+                                            <th>Sách</th>
+                                            <th>Đơn giá</th>
+                                            <th>Số lượng</th>
+                                            <th>Tổng</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -43,7 +49,11 @@
                                                     currencyCode="VND"/>
                                                 </td>
                                                 <td>
-                                                    <a href="<c:url value='/cart/remove/${cartItem.getBookId()}'/>" class="btn btn-danger">Remove</a>
+                                                    <form action="/cart/action" method="POST">
+                                                        <input type="hidden" name="_method" value="DELETE">
+                                                        <input type="hidden" name="bookId" value="${cartDetail.getBookId()}">
+                                                        <button type="submit" class="btn btn-danger">Remove</button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         </c:forEach>

@@ -280,6 +280,28 @@ public abstract class BaseRepository<T> {
         return models;
     }
 
+    public boolean update(String sql, Object ... params) {
+        Connection connection = AppContext.getInstance().getConnection();
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(sql);
+            for(int i = 0; i < params.length; i++)
+                stmt.setObject(i + 1, params[i]);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(stmt != null)
+                    stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
     protected abstract T mapResultSetToModel(ResultSet rs) throws SQLException;
     protected abstract Map<String, Object> mapModelToParams(T model);
 }
