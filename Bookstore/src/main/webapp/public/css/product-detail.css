@@ -1,0 +1,30 @@
+.splide__pagination__page.is-active {
+    background-color: #0d6efd !important;
+}
+
+.splide__arrow:hover {
+    background-color: #86b7fe; !important;
+}
+
+.book-img_container-lg {
+    width: 15rem;
+    box-sizing: border-box;
+    height: 24rem;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.book-img_container-lg img {
+    background-position: center;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    width: 16rem;
+    height: 25rem;
+    transition: 0.3s ease-in-out;
+}
+
+.book-img_container-lg:hover img {
+    transform: scale(1.1);
+    transition: 0.3s ease-in-out;
+}
+

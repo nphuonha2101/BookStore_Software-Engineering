@@ -3,6 +3,7 @@ package com.software.bookstore.http.services;
 import com.software.bookstore.http.models.Book;
 import com.software.bookstore.http.repositories.BookRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookService implements IService<Book>{
@@ -43,4 +44,16 @@ public class BookService implements IService<Book>{
         return repository.delete(id);
     }
 
+    public List<Book> getRandomBooks(int quantity) {
+        List<Book> result = new ArrayList<>();
+        long currentRowInDB = count();
+        quantity = quantity > currentRowInDB ? (int) currentRowInDB : quantity;
+
+        for (int i = 0; i < quantity; i++) {
+            int randomId = (int) (Math.floor(Math.random() * currentRowInDB));
+            result.add(findById(randomId));
+        }
+
+        return result;
+    }
 }
