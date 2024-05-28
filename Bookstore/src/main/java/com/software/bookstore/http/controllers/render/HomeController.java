@@ -14,7 +14,7 @@ import com.software.bookstore.http.services.BookService;
 import com.software.bookstore.mail.Mail;
 import com.software.bookstore.utils.Files;
 
-@WebServlet("/home")
+@WebServlet(urlPatterns = {"/", "/home"})
 public class HomeController extends HttpServlet {
 
     private final BookService bookService = new BookService();

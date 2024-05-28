@@ -100,7 +100,7 @@
                                         </dl>
 
                                         <a class="btn btn-primary card-button"
-                                           href="${pageContext.request.contextPath}/product-detail?id=${book.id}">Xem
+                                           href="${pageContext.request.contextPath}/product/${book.id}">Xem
                                             chi tiết</a>
                                     </div>
                                 </div>

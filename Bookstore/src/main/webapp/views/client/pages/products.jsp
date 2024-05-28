@@ -25,7 +25,7 @@
                     <div class="category-tag">
                         <span class="badge bg-primary">${firstCategory.name}</span>
                     </div>
-                    <img src="${product.img}" class="card-img-top" alt="Bìa sách">
+                    <img src="${pageContext.request.contextPath}/R.jpg" class="card-img-top" alt="Bìa sách">
                     <div class="card-body">
                         <h5 class="card-title">${product.title}</h5>
                         <dl>
@@ -44,7 +44,7 @@
                             <dd>${product.summary}</dd>
                         </dl>
 
-                        <a class="btn btn-primary card-button" href="${pageContext.request.contextPath}/product-detail?id=${product.id}">Xem chi tiết</a>
+                        <a class="btn btn-primary card-button" href="${pageContext.request.contextPath}/product/${product.id}">Xem chi tiết</a>
                     </div>
                 </div>
             </c:forEach>
