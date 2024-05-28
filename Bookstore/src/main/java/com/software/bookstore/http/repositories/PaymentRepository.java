@@ -34,7 +34,6 @@ public class PaymentRepository extends BaseRepository<Payment> {
         params.put("user_id", model.getUserId());
         params.put("cart_id", model.getCartId());
         params.put("total", model.getTotal());
-        params.put("created_at", model.getCreatedAt());
         params.put("payment_method", model.getPaymentMethod().name());
         params.put("payment_status", model.getPaymentStatus().name());
         return params;

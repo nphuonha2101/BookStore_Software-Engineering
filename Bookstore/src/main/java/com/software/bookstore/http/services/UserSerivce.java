@@ -51,13 +51,6 @@ public class UserSerivce implements IService<User> {
         return users.get(0);
     }
 
-    public User findByCartId(int id) {
-        List<User> users = repository.query("SELECT * FROM " + repository.getTable() + " WHERE CART_ID = ?", id);
-        if(users == null || users.isEmpty())
-            return null;
-        return users.get(0);
-    }
-
     @Override
     public User findLast() {
         return repository.findLast();

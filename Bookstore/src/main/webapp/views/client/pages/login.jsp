@@ -15,8 +15,11 @@
         <div class="col-md col-12 h-100">
             <div class="d-flex h-100 justify-content-center align-items-center">
                 <section id="loginPageLeft">
-                    <c:if test="${not empty loginMessage}">
-                        <div class="alert alert-danger">${loginMessage}</div>
+                    <c:if test="${not empty message}">
+                        <div class="alert alert-${alertType} alert-dismissible fade show" role="alert">
+                            ${message}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                     </c:if>
                     <div class="text-center">
                         <h1>B-World</h1>

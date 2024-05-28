@@ -1,10 +1,14 @@
 db.schema=
-db.url=
-db.username=
+db.url=jdbc:mysql://localhost:3306/bookstore
+db.username=root
 db.password=
 db.driver=
 
-app.version=
+app.version=1.0.0
+app.mode=dev
+app.host=http://localhost:8080
 
-mail.appName=filmbookingdn@gmail.com
-mail.appPassword=bzsr bhhg evvo crmq
+hash.secret=
+
+mail.appName=
+mail.appPassword=

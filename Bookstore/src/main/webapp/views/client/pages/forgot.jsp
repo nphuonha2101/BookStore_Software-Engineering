@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <link rel="stylesheet" href="/public/css/auth.css">
 </head>
@@ -13,6 +14,12 @@
         <div class="col-md col-12 h-100">
             <div class="d-flex h-100 justify-content-center align-items-center">
                 <section id="forgotPageLeft">
+                    <c:if test="${not empty message}">
+                        <div class="alert alert-${alertType} alert-dismissible fade show" role="alert">
+                            ${message}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </c:if>
                     <div class="text-center">
                         <h1>B-World</h1>
                         <p class="fs-3">Lấy lại mật khẩu của bạn</p>
@@ -22,7 +29,7 @@
                         <div class="form-group my-3">
                             <input type="email" class="form-forgot-control" id="email" name="email" placeholder="Email" required>
                         </div>
-                        <button type="submit" class="d-block w-100 btn-auth-main">Đăng nhập</button>
+                        <button type="submit" class="d-block w-100 btn-auth-main">Lấy lại mật khẩu</button>
                     </form>
                 </section>
             </div>
@@ -35,7 +42,7 @@
                         <span class="text-white">Chào mừng đã đến với</span>
                         <span class="text-auth-main">B-world</span>
                     </h1>
-    
+
                     <p class="description text-white">Nếu bạn không có nhu cầu lấy lại mật khẩu, vui lòng đăng nhập tại đây</p>
 
                     <a href="/login" class="btn-auth-main text-decoration-none" style="border-radius: 8px;">Đăng nhập</a>

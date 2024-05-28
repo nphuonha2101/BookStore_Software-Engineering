@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.software.bookstore.http.models.User;
 import com.software.bookstore.http.services.UserSerivce;
 import com.software.bookstore.utils.Decrypt;
+import com.software.bookstore.utils.SessionAlert;
 
 @WebServlet("/auth/login")
 public class LoginController extends HttpServlet {
@@ -38,7 +39,7 @@ public class LoginController extends HttpServlet {
     }
 
     private void loginFailed(HttpSession session, HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        session.setAttribute("loginMessage", "Sai tên đăng nhập hoặc mật khẩu");
+        SessionAlert.setMessage(session, "Sai tên đăng nhập hoặc mật khẩu", "danger");
         resp.sendRedirect("/login");
     }
 }

@@ -15,6 +15,7 @@ import com.software.bookstore.http.services.CartService;
 import com.software.bookstore.http.services.UserSerivce;
 import com.software.bookstore.utils.Dates;
 import com.software.bookstore.utils.Decrypt;
+import com.software.bookstore.utils.SessionAlert;
 
 @WebServlet("/auth/register")
 public class RegisterController extends HttpServlet {
@@ -34,6 +35,12 @@ public class RegisterController extends HttpServlet {
         String passwordConfirmation = req.getParameter("passwordConfirmation");
         HttpSession session = req.getSession();
 
+        if(userSerivce.findByEmail(email) != null) {
+            session.setAttribute("registerMessage", "Email đã tồn tại");
+            resp.sendRedirect("/register");
+            return;
+        }
+
         if(password.equals(passwordConfirmation)) {
             String hashedPassword = Decrypt.sha256(password);
             User user = new User();
@@ -45,7 +52,7 @@ public class RegisterController extends HttpServlet {
             if(userSerivce.save(user) != null) {
                 Cart createdCart = createNewCart(user);
                 if(createdCart != null) {
-                    session.setAttribute("loginMessage", "Đăng ký tài khoản thành công, vui lòng đăng nhập");
+                    SessionAlert.setMessage(session, "Đăng ký tài khoản thành công, vui lòng đăng nhập", "success");
                     resp.sendRedirect("/login");
                 } else {
                     session.setAttribute("registerMessage", "Đã có lỗi xảy ra, vui lòng thử lại");

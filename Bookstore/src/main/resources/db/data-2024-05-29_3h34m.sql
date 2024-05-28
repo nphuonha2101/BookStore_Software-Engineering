@@ -110,7 +110,7 @@ CREATE TABLE `carts` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,6 +149,33 @@ INSERT INTO `categories` VALUES (1,'Suspense/Thriller','Ut animi tempora dolore 
 UNLOCK TABLES;
 
 --
+-- Table structure for table `forgot_passwords`
+--
+
+DROP TABLE IF EXISTS `forgot_passwords`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `forgot_passwords` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `expires` timestamp NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `forgot_passwords_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `forgot_passwords`
+--
+
+LOCK TABLES `forgot_passwords` WRITE;
+/*!40000 ALTER TABLE `forgot_passwords` DISABLE KEYS */;
+/*!40000 ALTER TABLE `forgot_passwords` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `payments`
 --
 
@@ -162,7 +189,7 @@ CREATE TABLE `payments` (
   `payment_status` enum('PENDING','SUCCESS','FAILED') NOT NULL DEFAULT 'PENDING',
   `payment_method` enum('VNPAY','CASH') NOT NULL DEFAULT 'CASH',
   `total` double NOT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `cart_id` (`cart_id`),
@@ -196,7 +223,7 @@ CREATE TABLE `users` (
   `ADDRESS` varchar(255) NOT NULL,
   `DOB` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,7 +232,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Octavio Toy','3kitzr1lzx7','samella.stehr@hotmail.com','1187 Lissette Via, Katihaven, KS 52489-2582','2005-07-20 17:00:00'),(2,'Gregoria Schamberger IV','8nvnd543zvc1st4','marinda.dietrich@hotmail.com','Suite 886 24454 Irina Island, Tashashire, CO 82420','1974-01-15 17:00:00'),(3,'Kami Mosciski','aty3af5r','lyndsey.williamson@yahoo.com','Suite 081 014 Nikolaus Lights, North Shenitachester, PA 56616-0429','1999-07-05 17:00:00'),(4,'Dr. Leeanna Murray','47l6n4zlj','jonathon.jakubowski@gmail.com','Suite 428 147 Melaine Land, Victorinamouth, KY 98742','1974-12-19 17:00:00'),(5,'Mr. Angelo Langworth','5p1gtowzo2kohu6','gracia.kub@yahoo.com','6584 Howard Inlet, New Gene, NH 61644-1747','2000-05-12 17:00:00'),(6,'Georgene Boyer','klhrlyli8o5','danyelle.nienow@hotmail.com','Apt. 776 17418 Deangelo Field, Daylestad, OH 59369','1974-11-23 17:00:00'),(7,'Mr. Vania Toy','1v13zemla68rzg','tatiana.herman@hotmail.com','Apt. 832 69107 Gerry Knolls, Claudineberg, AL 23100-0235','1979-07-14 17:00:00'),(8,'Mrs. Monika Kassulke','oibtooh79d1a','robin.gusikowski@hotmail.com','0793 Rusty Shoal, East Judi, OH 04864-3888','1973-06-11 17:00:00'),(9,'Loyce Mayert','uny5j9uu2yoa1','sherman.stracke@gmail.com','2845 Yost Dale, Elviraville, OH 52863','1979-06-05 17:00:00'),(10,'Alexis Orn','q3kkiovg67','rosella.shanahan@yahoo.com','Suite 461 94370 Malik Summit, New Cheryll, TX 13045','1991-11-11 17:00:00'),(11,'Mrs. Enedina Kreiger','iimg45erjdns4','dahlia.lehner@yahoo.com','60842 Cruickshank Valleys, Schustermouth, ID 55361','1987-06-05 17:00:00'),(12,'Norris Wyman','lyotui7rz1vf','cristina.senger@gmail.com','3131 Larraine Squares, New Kyra, GA 01335','1973-12-12 17:00:00'),(13,'Bernie Steuber','dymv3sehx','margarett.reilly@yahoo.com','Apt. 962 6813 Lacie Views, Denesikchester, MS 56319-9113','2006-04-02 17:00:00'),(14,'Melody Turcotte','jo8v1jm1ml','maurice.weissnat@gmail.com','Suite 787 6669 O\'Keefe Villages, Thielchester, IN 48294','2005-04-30 17:00:00'),(15,'Dillon Bergnaum','hzsoikmb','ami.blick@gmail.com','Suite 753 5117 Dibbert Forge, Keeblerfurt, WA 05521-3288','1974-08-03 17:00:00'),(20,'Trần Thắng Lợi','199afc940591d13219d82d9eda8544275234c64cb5f2571b00096e3cd24a7da1','thangloitran406@gmail.com','75/3 Tân Lập, Đông Hoà','2003-09-07 17:00:00');
+INSERT INTO `users` VALUES (1,'Octavio Toy','3kitzr1lzx7','samella.stehr@hotmail.com','1187 Lissette Via, Katihaven, KS 52489-2582','2005-07-20 17:00:00'),(2,'Gregoria Schamberger IV','8nvnd543zvc1st4','marinda.dietrich@hotmail.com','Suite 886 24454 Irina Island, Tashashire, CO 82420','1974-01-15 17:00:00'),(3,'Kami Mosciski','aty3af5r','lyndsey.williamson@yahoo.com','Suite 081 014 Nikolaus Lights, North Shenitachester, PA 56616-0429','1999-07-05 17:00:00'),(4,'Dr. Leeanna Murray','47l6n4zlj','jonathon.jakubowski@gmail.com','Suite 428 147 Melaine Land, Victorinamouth, KY 98742','1974-12-19 17:00:00'),(5,'Mr. Angelo Langworth','5p1gtowzo2kohu6','gracia.kub@yahoo.com','6584 Howard Inlet, New Gene, NH 61644-1747','2000-05-12 17:00:00'),(6,'Georgene Boyer','klhrlyli8o5','danyelle.nienow@hotmail.com','Apt. 776 17418 Deangelo Field, Daylestad, OH 59369','1974-11-23 17:00:00'),(7,'Mr. Vania Toy','1v13zemla68rzg','tatiana.herman@hotmail.com','Apt. 832 69107 Gerry Knolls, Claudineberg, AL 23100-0235','1979-07-14 17:00:00'),(8,'Mrs. Monika Kassulke','oibtooh79d1a','robin.gusikowski@hotmail.com','0793 Rusty Shoal, East Judi, OH 04864-3888','1973-06-11 17:00:00'),(9,'Loyce Mayert','uny5j9uu2yoa1','sherman.stracke@gmail.com','2845 Yost Dale, Elviraville, OH 52863','1979-06-05 17:00:00'),(10,'Alexis Orn','q3kkiovg67','rosella.shanahan@yahoo.com','Suite 461 94370 Malik Summit, New Cheryll, TX 13045','1991-11-11 17:00:00'),(11,'Mrs. Enedina Kreiger','iimg45erjdns4','dahlia.lehner@yahoo.com','60842 Cruickshank Valleys, Schustermouth, ID 55361','1987-06-05 17:00:00'),(12,'Norris Wyman','lyotui7rz1vf','cristina.senger@gmail.com','3131 Larraine Squares, New Kyra, GA 01335','1973-12-12 17:00:00'),(13,'Bernie Steuber','dymv3sehx','margarett.reilly@yahoo.com','Apt. 962 6813 Lacie Views, Denesikchester, MS 56319-9113','2006-04-02 17:00:00'),(14,'Melody Turcotte','jo8v1jm1ml','maurice.weissnat@gmail.com','Suite 787 6669 O\'Keefe Villages, Thielchester, IN 48294','2005-04-30 17:00:00'),(15,'Dillon Bergnaum','hzsoikmb','ami.blick@gmail.com','Suite 753 5117 Dibbert Forge, Keeblerfurt, WA 05521-3288','1974-08-03 17:00:00'),(20,'Trần Thắng Lợi','7beecdbb4f94339bf02cce882cacf5c54a7eed3903383d316980a985f0c1b0d4','thangloitran406@gmail.com','75/3 Tân Lập, Đông Hoà','2003-09-07 17:00:00');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -218,4 +245,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-29  0:55:41
+-- Dump completed on 2024-05-29  3:34:13
