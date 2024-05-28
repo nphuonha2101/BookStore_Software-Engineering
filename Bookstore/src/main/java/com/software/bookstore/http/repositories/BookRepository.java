@@ -24,15 +24,15 @@ public class BookRepository extends BaseRepository<Book> {
     protected Book mapResultSetToModel(ResultSet rs) throws SQLException {
         CategoryRepository categoryRepository = new CategoryRepository("categories");
         return new Book(
-                rs.getInt("id"),
-                rs.getString("title"),
-                rs.getString("author"),
-                rs.getString("publisher"),
-                rs.getString("summary"),
-                rs.getString("img"),
-                rs.getDouble("price"),
-                rs.getString("isbn"),
-                categoryRepository.findAll(rs.getInt("id"))
+            rs.getInt("id"),
+            rs.getString("title"),
+            rs.getString("author"),
+            rs.getString("publisher"),
+            rs.getString("summary"),
+            rs.getString("img"),
+            rs.getDouble("price"),
+            rs.getString("isbn"),
+            categoryRepository.findAll(rs.getInt("id"))
         );
     }
 

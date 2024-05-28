@@ -109,6 +109,35 @@ public abstract class BaseRepository<T> {
         return model;
     }
 
+    public T findLast() {
+        Connection connection = AppContext.getInstance().getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        T model = null;
+        long count = getCount();
+        try {
+            String query = "SELECT * FROM " + table + " LIMIT 1 OFFSET ?";
+            stmt = connection.prepareStatement(query);
+            stmt.setObject(1, count - 1);
+            rs = stmt.executeQuery();
+            if(rs.next())
+                model = mapResultSetToModel(rs);
+            return model;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(rs != null)
+                    rs.close();
+                if(stmt != null)
+                    stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return model;
+    }
+
     public T save(T model) {
         Connection connection = AppContext.getInstance().getConnection();
         PreparedStatement stmt = null;
@@ -127,9 +156,7 @@ public abstract class BaseRepository<T> {
             for(String key : params.keySet())
                 stmt.setObject(i++, params.get(key));
             stmt.executeUpdate();
-            rs = stmt.getGeneratedKeys();
-            if(rs.next())
-                model = findById(rs.getInt(1));
+            model = findLast();
             return model;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -224,19 +251,20 @@ public abstract class BaseRepository<T> {
         return count;
     }
 
-    public T query(String sql, Object ... params) {
+    public List<T> query(String sql, Object ... params) {
         Connection connection = AppContext.getInstance().getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        T model = null;
+        List<T> models = null;
         try {
             stmt = connection.prepareStatement(sql);
             for(int i = 0; i < params.length; i++)
                 stmt.setObject(i + 1, params[i]);
             rs = stmt.executeQuery();
-            if(rs.next())
-                model = mapResultSetToModel(rs);
-            return model;
+            models = new ArrayList<>();
+            while(rs.next())
+                models.add(mapResultSetToModel(rs));
+            return models;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -249,7 +277,7 @@ public abstract class BaseRepository<T> {
                 e.printStackTrace();
             }
         }
-        return model;
+        return models;
     }
 
     protected abstract T mapResultSetToModel(ResultSet rs) throws SQLException;

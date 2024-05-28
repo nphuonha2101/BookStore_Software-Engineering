@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.software.bookstore.http.models.Cart;
 import com.software.bookstore.http.models.User;
+import com.software.bookstore.http.services.CartService;
 import com.software.bookstore.http.services.UserSerivce;
 import com.software.bookstore.utils.Dates;
 import com.software.bookstore.utils.Decrypt;
@@ -18,6 +20,7 @@ import com.software.bookstore.utils.Decrypt;
 public class RegisterController extends HttpServlet {
 
     private final UserSerivce userSerivce = new UserSerivce();
+    private final CartService cartService = new CartService();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,12 +43,24 @@ public class RegisterController extends HttpServlet {
             user.setAddress(address);
             user.setDob(Dates.toSQLTimestamp(birthday));
             if(userSerivce.save(user) != null) {
-                session.setAttribute("loginMessage", "Đăng ký tài khoản thành công, vui lòng đăng nhập");
-                resp.sendRedirect("/login");
+                Cart createdCart = createNewCart(user);
+                if(createdCart != null) {
+                    session.setAttribute("loginMessage", "Đăng ký tài khoản thành công, vui lòng đăng nhập");
+                    resp.sendRedirect("/login");
+                } else {
+                    session.setAttribute("registerMessage", "Đã có lỗi xảy ra, vui lòng thử lại");
+                    resp.sendRedirect("/register");
+                }
             }
         } else {
             session.setAttribute("registerMessage", "Nhập lại password không chính xác");
             resp.sendRedirect("/register");
         }
+    }
+
+    private Cart createNewCart(User user) {
+        Cart cart = new Cart();
+        cart.setUserId(user.getId());
+        return cartService.save(cart);
     }
 }

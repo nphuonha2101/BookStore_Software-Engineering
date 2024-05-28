@@ -56,4 +56,9 @@ public class BookService implements IService<Book>{
 
         return result;
     }
+
+    @Override
+    public Book findLast() {
+        return repository.findLast();
+    }
 }

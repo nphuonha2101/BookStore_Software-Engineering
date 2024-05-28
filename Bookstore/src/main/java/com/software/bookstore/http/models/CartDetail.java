@@ -1,7 +1,5 @@
 package com.software.bookstore.http.models;
 
-import java.sql.Timestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,12 +9,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class User {
-    private int id;
-    private String email;
-    private String password;
-    private String fullName;
-    private String address;
-    private Timestamp dob;
+public class CartDetail {
+    private int cartId;
+    private int bookId;
+    private int quantity;
+    private double price;
+
+    private Book book;
     private Cart cart;
 }

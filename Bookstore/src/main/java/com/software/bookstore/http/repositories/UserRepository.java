@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.software.bookstore.http.models.User;
+import com.software.bookstore.http.services.CartService;
 
 public class UserRepository extends BaseRepository<User> {
 
@@ -15,6 +16,7 @@ public class UserRepository extends BaseRepository<User> {
 
     @Override
     protected User mapResultSetToModel(ResultSet rs) throws SQLException {
+        CartService cartService = new CartService();
         User user = new User();
         user.setId(rs.getInt("id"));
         user.setEmail(rs.getString("email"));
@@ -22,6 +24,7 @@ public class UserRepository extends BaseRepository<User> {
         user.setFullName(rs.getString("full_name"));
         user.setAddress(rs.getString("address"));
         user.setDob(rs.getTimestamp("dob"));
+        user.setCart(cartService.findByUserId(user.getId()));
         return user;
     }
 
