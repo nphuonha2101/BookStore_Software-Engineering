@@ -44,7 +44,7 @@
                             <dd>${product.summary}</dd>
                         </dl>
 
-                        <button class="btn btn-primary card-button">Xem chi tiết</button>
+                        <a class="btn btn-primary card-button" href="${pageContext.request.contextPath}/product/${product.id}">Xem chi tiết</a>
                     </div>
                 </div>
             </c:forEach>
