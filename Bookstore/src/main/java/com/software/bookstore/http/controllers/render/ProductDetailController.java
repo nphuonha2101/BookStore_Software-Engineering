@@ -4,6 +4,7 @@ import com.software.bookstore.core.base.page.APage;
 import com.software.bookstore.core.base.page.ClientPage;
 import com.software.bookstore.http.models.Book;
 import com.software.bookstore.http.services.BookService;
+import com.software.bookstore.utils.SessionAlert;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,10 +26,17 @@ public class ProductDetailController extends HttpServlet {
 
         APage productsPage = new ClientPage(req, resp, "product-detail.jsp", "master.jsp");
 
+        String[] messageAlert = SessionAlert.getMessage(req.getSession());
+        
         productsPage.setTitle(currentBook.getTitle());
         productsPage.setObject("book", currentBook);
         productsPage.setObject("books", top20Books);
+        productsPage.setObject("message", messageAlert[0]);
+        productsPage.setObject("alertType", messageAlert[1]);
         productsPage.render();
+
+        productsPage.removeObject("message");
+        productsPage.removeObject("alertType");
 
     }
 

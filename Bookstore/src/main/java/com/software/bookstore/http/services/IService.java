@@ -10,5 +10,6 @@ public interface IService<T> {
     public T save(T model);
     public T update(T model);
     public boolean delete(int id);
+    public T findLast();
 
 }

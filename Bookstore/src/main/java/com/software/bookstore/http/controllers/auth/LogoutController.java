@@ -13,6 +13,7 @@ public class LogoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().removeAttribute("loginUser");
-        resp.sendRedirect("/home");
+        String referer = req.getHeader("Referer");
+        resp.sendRedirect(referer);
     }
 }

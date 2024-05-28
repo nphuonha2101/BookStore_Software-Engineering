@@ -14,6 +14,12 @@
 </head>
 <div id="productDetail">
     <div class="container">
+        <c:if test="${not empty message}">
+            <div class="alert alert-${alertType} alert-dismissible fade show" role="alert">
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </c:if>
         <div class="row">
             <div class="row justify-content-center">
                 <div class="col-4 d-flex justify-content-end">
@@ -35,7 +41,15 @@
                         />
                     </h4>
                     <p class="my-5">${book.summary}</p>
-                    <button class="btn btn-primary">Mua ngay</button>
+                    <div class="d-flex align-items-center gap-3">
+                        <button class="btn btn-primary">Mua ngay</button>
+                        <form action="/cart/action" method="POST">
+                            <input type="hidden" name="bookId" value="${book.getId()}">
+                            <input type="hidden" name="price" value="${book.getPrice()}">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn btn-warning">Thêm vào giỏ hàng</button>
+                        </form>
+                    </div>
 
                     <hr>
 
