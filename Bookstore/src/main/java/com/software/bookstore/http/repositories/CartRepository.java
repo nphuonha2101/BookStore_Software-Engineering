@@ -8,7 +8,6 @@ import java.util.Map;
 
 import com.software.bookstore.http.models.Cart;
 import com.software.bookstore.http.services.CartService;
-import com.software.bookstore.http.services.UserSerivce;
 
 public class CartRepository extends BaseRepository<Cart> {
 
@@ -18,12 +17,9 @@ public class CartRepository extends BaseRepository<Cart> {
 
     @Override
     protected Cart mapResultSetToModel(ResultSet rs) throws SQLException {
-        UserSerivce userSerivce = new UserSerivce();
         Cart cart = new Cart();
         cart.setId(rs.getInt("id"));
         cart.setUserId(rs.getInt("user_id"));
-
-        cart.setUser(userSerivce.findByCartId(cart.getId()));
         return cart;
     }
 

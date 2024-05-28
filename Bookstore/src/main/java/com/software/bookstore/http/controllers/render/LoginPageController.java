@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.software.bookstore.core.base.page.APage;
 import com.software.bookstore.core.base.page.ClientPage;
+import com.software.bookstore.utils.SessionAlert;
 
 @WebServlet("/login")
 public class LoginPageController extends HttpServlet {
@@ -18,12 +19,13 @@ public class LoginPageController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         APage page = new ClientPage(req, resp, "login.jsp", "blank.jsp");
-        if(session.getAttribute("loginMessage") != null)
-            page.setObject("loginMessage", session.getAttribute("loginMessage"));
+        String[] messageAlert = SessionAlert.getMessage(session);
         page.setTitle("Đăng nhập");
+        page.setObject("message", messageAlert[0]);
+        page.setObject("alertType", messageAlert[1]);
         page.render();
 
-        session.removeAttribute("loginMessage");
-        page.removeObject("loginMessage");
+        page.removeObject("message");
+        page.removeObject("alertType");
     }
 }
