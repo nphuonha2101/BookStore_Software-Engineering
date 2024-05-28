@@ -94,7 +94,6 @@ CREATE TABLE `cart_details` (
 
 LOCK TABLES `cart_details` WRITE;
 /*!40000 ALTER TABLE `cart_details` DISABLE KEYS */;
-INSERT INTO `cart_details` VALUES (14,2,1,432722.41),(14,7,1,209565.53);
 /*!40000 ALTER TABLE `cart_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,6 +149,39 @@ INSERT INTO `categories` VALUES (1,'Suspense/Thriller','Ut animi tempora dolore 
 UNLOCK TABLES;
 
 --
+-- Table structure for table `payments`
+--
+
+DROP TABLE IF EXISTS `payments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `payments` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
+  `cart_id` bigint NOT NULL,
+  `payment_status` enum('PENDING','SUCCESS','FAILED') NOT NULL DEFAULT 'PENDING',
+  `payment_method` enum('VNPAY','CASH') NOT NULL DEFAULT 'CASH',
+  `total` double NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `cart_id` (`cart_id`),
+  CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`ID`),
+  CONSTRAINT `payments_ibfk_2` FOREIGN KEY (`cart_id`) REFERENCES `carts` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `payments`
+--
+
+LOCK TABLES `payments` WRITE;
+/*!40000 ALTER TABLE `payments` DISABLE KEYS */;
+INSERT INTO `payments` VALUES (1,20,14,'PENDING','CASH',642287.94,NULL),(2,20,14,'PENDING','CASH',642287.94,NULL);
+/*!40000 ALTER TABLE `payments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -186,4 +218,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-28 23:09:05
+-- Dump completed on 2024-05-29  0:55:41

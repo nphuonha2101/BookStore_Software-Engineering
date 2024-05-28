@@ -15,7 +15,7 @@ import com.software.bookstore.http.services.CartDetailService;
 import com.software.bookstore.utils.SessionAlert;
 
 @WebServlet("/cart/action")
-public class CartActionController extends HttpServlet {
+public class CartController extends HttpServlet {
 
     private final CartDetailService cartDetailService = new CartDetailService();
 
@@ -45,6 +45,8 @@ public class CartActionController extends HttpServlet {
         int bookId = Integer.parseInt(req.getParameter("bookId"));
         int quantity = Integer.parseInt(req.getParameter("quantity"));
         double price = Double.parseDouble(req.getParameter("price"));
+        String buyImmediately = req.getParameter("isBuyImmediately");
+        boolean isBuyImmediately = buyImmediately != null && buyImmediately.equals("true");
         if (loginUser != null) {
             int cartId = loginUser.getCart().getId();
             CartDetail cartDetail = new CartDetail();
@@ -54,8 +56,12 @@ public class CartActionController extends HttpServlet {
             cartDetail.setQuantity(quantity);
             cartDetail = cartDetailService.save(cartDetail);
             if (cartDetail != null) {
-                SessionAlert.setMessage(session, "Thêm vào giỏ hàng thành công", "success");
-                resp.sendRedirect("/product/" + bookId);
+                if(isBuyImmediately) {
+                    resp.sendRedirect("/cart");
+                } else {
+                    SessionAlert.setMessage(session, "Thêm vào giỏ hàng thành công", "success");
+                    resp.sendRedirect("/product/" + bookId);
+                }
             } else {
                 SessionAlert.setMessage(session, "Thêm vào giỏ hàng thất bại", "danger");
                 resp.sendRedirect("/product/" + bookId);

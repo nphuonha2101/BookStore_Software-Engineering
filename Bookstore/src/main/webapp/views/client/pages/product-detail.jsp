@@ -42,7 +42,13 @@
                     </h4>
                     <p class="my-5">${book.summary}</p>
                     <div class="d-flex align-items-center gap-3">
-                        <button class="btn btn-primary">Mua ngay</button>
+                        <form action="/cart/action" method="POST">
+                            <input type="hidden" name="bookId" value="${book.getId()}">
+                            <input type="hidden" name="price" value="${book.getPrice()}">
+                            <input type="hidden" name="quantity" value="1">
+                            <input type="hidden" name="isBuyImmediately" value="true">
+                            <button type="submit" class="btn btn-primary">Mua ngay</button>
+                        </form>
                         <form action="/cart/action" method="POST">
                             <input type="hidden" name="bookId" value="${book.getId()}">
                             <input type="hidden" name="price" value="${book.getPrice()}">
