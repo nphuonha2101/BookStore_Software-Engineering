@@ -81,6 +81,54 @@ public abstract class BaseRepository<T> {
         return models;
     }
 
+    public List<T> getDataForDataTable(int start, int length, String[] searchColumns, String searchValue, String orderColumn, String orderDir) {
+        Connection connection = AppContext.getInstance().getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<T> models = null;
+        try {
+            StringBuilder query = new StringBuilder("SELECT SQL_CALC_FOUND_ROWS * FROM " + table + " WHERE 1=1 "); // 1=1 để dễ thêm điều kiện
+            if (!searchValue.isEmpty()) {
+                query.append("AND (");
+                for (String column : searchColumns) {
+                    query.append(column).append(" LIKE ? OR ");
+                }
+                query.setLength(query.length() - 4); // remove the last " OR "
+                query.append(") ");
+            }
+            query.append("ORDER BY ").append(orderColumn).append(" ").append(orderDir);
+            query.append(" LIMIT ? OFFSET ?");
+
+            stmt = connection.prepareStatement(query.toString());
+            int i = 1;
+            if (!searchValue.isEmpty()) {
+                for (int j = 0; j < searchColumns.length; j++) {
+                    stmt.setString(i++, "%" + searchValue + "%");
+                }
+            }
+            stmt.setInt(i++, length);
+            stmt.setInt(i, start);
+            rs = stmt.executeQuery();
+            models = new ArrayList<>();
+            while(rs.next())
+                models.add(mapResultSetToModel(rs));
+            return models;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(rs != null)
+                    rs.close();
+                if(stmt != null)
+                    stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return models;
+
+    }
+
     public T findById(int id) {
         Connection connection = AppContext.getInstance().getConnection();
         PreparedStatement stmt = null;

@@ -26,6 +26,11 @@
 
         <!-- custom css -->
         <link rel="stylesheet" href="/public/css/variables.css">
+
+        <!-- data table -->
+        <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.0.8/datatables.min.css" rel="stylesheet">
+        <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.0.8/datatables.min.js"></script>
+
         <title>${title}</title>
     </head>
     <body>

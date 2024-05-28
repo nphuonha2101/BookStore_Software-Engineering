@@ -19,6 +19,11 @@ public class BookService implements IService<Book>{
         return repository.findAllWithOffsetAndLimit(offset, limit);
     }
 
+    public List<Book> getDataForDataTable(int start, int length, String[] searchColumns, String searchValue, String orderColumn, String orderDir) {
+        return repository.getDataForDataTable(start, length, searchColumns, searchValue, orderColumn, orderDir);
+    }
+
+
     @Override
     public List<Book> findAll() {
         return repository.findAll();

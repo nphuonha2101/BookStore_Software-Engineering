@@ -2,6 +2,7 @@ package com.software.bookstore.http.services;
 
 import java.util.List;
 
+import com.software.bookstore.http.models.Book;
 import com.software.bookstore.http.models.CartDetail;
 import com.software.bookstore.http.repositories.CartDetailRepository;
 

@@ -104,4 +104,26 @@ public class JsonFactory {
             this.code = EResponseCode.NOT_FOUND;
         }
     }
+
+    public static class InternalServerError extends ResponseType {
+
+        public InternalServerError() {
+            this.code = EResponseCode.INTERNAL_SERVER_ERROR;
+        }
+
+        public InternalServerError(String message) {
+            super(message);
+            this.code = EResponseCode.INTERNAL_SERVER_ERROR;
+        }
+
+        public InternalServerError(Object data) {
+            super(data);
+            this.code = EResponseCode.INTERNAL_SERVER_ERROR;
+        }
+
+        public InternalServerError(String message, Object data) {
+            super(message, data);
+            this.code = EResponseCode.INTERNAL_SERVER_ERROR;
+        }
+    }
 }

@@ -24,7 +24,7 @@
             <div class="row justify-content-center">
                 <div class="col-4 d-flex justify-content-end">
                     <div class="book-img_container-lg pe-5">
-                        <img src="${pageContext.request.contextPath}/R.jpg" alt="Book img"/>
+                        <img src="${book.img}" alt="Book img"/>
                     </div>
 
                 </div>
@@ -134,4 +134,4 @@
     </div>
 </div>
 
-<script src="${pageContext.request.contextPath}/public/js/product-detail.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/public/js/product-detail.js"></script>
