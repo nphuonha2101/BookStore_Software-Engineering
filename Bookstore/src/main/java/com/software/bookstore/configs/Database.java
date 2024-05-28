@@ -34,9 +34,7 @@ public class Database {
         try {
             Class.forName(instance.driver);
             connection = DriverManager.getConnection(instance.url, instance.username, instance.password);
-        } catch(ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch(SQLException e) {
+        } catch(ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
         return connection;

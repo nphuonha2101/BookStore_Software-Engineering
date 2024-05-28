@@ -30,6 +30,9 @@ public abstract class APage implements IPage {
         req.setAttribute("title", title);
     }
 
-
+    @Override
+    public void removeObject(String key) {
+        req.removeAttribute(key);
+    }
 
 }

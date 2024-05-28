@@ -1,6 +1,7 @@
 <%-- Document : header Created on : May 19, 2024, 2:36:08 AM Author : thang --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
     <link rel="stylesheet" href="/public/css/header.css">
@@ -63,10 +64,23 @@
 
                         <div class="col-md-10 col-4">
                             <div class="user d-lg-block d-none">
-                                <div class="d-flex justify-content-end align-items-center">
-                                    <a class="ms-3 text-decoration-none text-main" href="/login">Đăng nhập</a>
-                                    <a class="ms-3 text-decoration-none text-main" href="/register">Đăng ký</a>
-                                </div>
+                                <c:choose>
+                                    <c:when test="${empty sessionScope.loginUser}">
+                                        <div class="d-flex justify-content-end align-items-center">
+                                            <a class="ms-3 text-decoration-none text-main" href="/login">Đăng nhập</a>
+                                            <a class="ms-3 text-decoration-none text-main" href="/register">Đăng ký</a>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <form action="/auth/logout" method="POST">
+                                            <div class="d-flex justify-content-end align-items-center">
+                                                <p class="ms-3 text-main my-0">Hello ${sessionScope.loginUser.getFullName()}</p>
+                                                <button type="submit" class="ms-3 bg-white border-0 text-main" href="">Đăng xuất</button>
+                                            </div>
+                                        </form>
+                                    </c:otherwise>
+                                </c:choose>
+
                             </div>
 
                             <div class="user-relative ms-md-3 d-lg-none d-block">
@@ -81,7 +95,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="d-md-none d-block col-1">
                             <button id="openSideMenuBtn" class="bg-white border-0">
                                 <i class="fas fa-bars text-main"></i>
@@ -101,13 +115,13 @@
                     <li><a href="/products" class="text-decoration-none text-dark">Thư viện</a></li>
                     <li><a href="" class="text-decoration-none text-dark">Liên hệ</a></li>
                 </ul>
-    
+
                 <div class="header-bottom-contact d-flex gap-5 align-items-center">
                     <div class="phone-number">
                         <i class="text-main fas fa-phone-alt"></i>
                         <span>+84 879 603 547</span>
                     </div>
-    
+
                     <button class="contact-btn bg-main-outline px-3 py-2">
                         <span>Liên hệ với chúng tôi</span>
                     </button>

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <link rel="stylesheet" href="/public/css/auth.css">
 </head>
@@ -13,6 +14,9 @@
         <div class="col-md col-12 h-100">
             <div class="d-flex h-100 justify-content-center align-items-center">
                 <section id="registerPageLeft">
+                    <c:if test="${not empty registerMessage}">
+                        <div class="alert alert-danger">${registerMessage}</div>
+                    </c:if>
                     <div class="text-center">
                         <h1>B-World</h1>
                         <p class="fs-3">Đăng ký tài khoản mới</p>
@@ -23,9 +27,6 @@
                             <input type="email" class="form-register-control" id="email" name="email" placeholder="Email" required>
                         </div>
                         <div class="form-group my-3">
-                            <input type="password" class="form-register-control" id="password" name="password" placeholder="Mật khẩu" required>
-                        </div>
-                        <div class="form-group my-3">
                             <input type="text" class="form-register-control" id="fullname" name="fullname" placeholder="Họ và tên" required>
                         </div>
                         <div class="form-group my-3">
@@ -34,6 +35,12 @@
                         <div class="form-group my-3">
                             <label for="#birtdate">Ngày sinh</label>
                             <input type="date" class="form-register-control mt-2" id="birthday" name="birthday" placeholder="Ngày sinh" required>
+                        </div>
+                        <div class="form-group my-3">
+                            <input type="password" class="form-register-control" id="password" name="password" placeholder="Mật khẩu" required>
+                        </div>
+                        <div class="form-group my-3">
+                            <input type="password" class="form-register-control" id="password" name="passwordConfirmation" placeholder="Nhập lại mật khẩu" required>
                         </div>
                         <button type="submit" class="d-block w-100 btn-auth-main">Đăng ký</button>
                     </form>
