@@ -1,6 +1,7 @@
 package com.software.bookstore.http.repositories;
 
 import com.software.bookstore.core.base.context.AppContext;
+import com.software.bookstore.http.models.Book;
 import com.software.bookstore.http.models.Category;
 
 import java.sql.Connection;
@@ -69,6 +70,46 @@ public class CategoryRepository extends BaseRepository<Category> {
         return false;
     }
 
+
+    public List<Category> save(Book book)  {
+        Connection connection = AppContext.getInstance().getConnection();
+        PreparedStatement stmt = null;
+        List<Category> categoryList = book.getCategories();
+
+        try {
+            for (Category category : categoryList) {
+                String query = "INSERT INTO book_categories(id_book, id_category) VALUES(?, ?)";
+                stmt = connection.prepareStatement(query);
+
+                stmt.setInt(1, book.getId());
+                stmt.setInt(2, category.getId());
+
+                stmt.executeUpdate();
+            }
+            return categoryList;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        } finally {
+            try {
+                if (stmt != null)
+                    stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+
+    public List<Category> update(Book book) {
+        boolean deleteOldCategory = delete(book.getId());
+        List<Category> result = null;
+        if (deleteOldCategory) {
+            result = save(book);
+        }
+
+        return result;
+    }
 
     @Override
     protected Category mapResultSetToModel(ResultSet rs) throws SQLException {
