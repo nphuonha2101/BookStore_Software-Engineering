@@ -67,13 +67,14 @@
                                     <input type="text" class="form-control" id="publisher" name="publisher">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="categories" class="form-label">Thể loại</label>
-                                    <select class="form-select" id="categories" name="categories" multiple>
+                                    <label for="categoriesSelect" class="form-label">Thể loại</label>
+                                    <select class="form-select" id="categoriesSelect" multiple>
                                         <c:forEach var="category" items="${categories}">
                                             <option class="my-2 p-2 rounded bg-primary text-white"
                                                     value="${category.id}">${category.name}</option>
                                         </c:forEach>
                                     </select>
+                                    <input type="hidden" name="categories" id="categoryValues" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="price" class="form-label">Giá</label>

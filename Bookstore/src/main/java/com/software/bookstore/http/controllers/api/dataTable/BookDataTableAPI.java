@@ -123,7 +123,7 @@ public class BookDataTableAPI extends HttpServlet {
         double price = Double.parseDouble(bookData.get("price"));
         String summary = bookData.get("summary");
 
-        System.out.println("summary: " + summary);
+        System.out.println("categories: " + categories);
 
         List<Category> categoryList = new ArrayList<>();
 
@@ -135,6 +135,8 @@ public class BookDataTableAPI extends HttpServlet {
                 categoryList.add(categoryObj);
             }
         }
+
+        System.out.println("Category list: " + categoryList);
 
         Book book = new Book();
         book.setTitle(title);
