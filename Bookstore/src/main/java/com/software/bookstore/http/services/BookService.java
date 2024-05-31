@@ -5,6 +5,7 @@ import com.software.bookstore.http.repositories.BookRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class BookService implements IService<Book>{
     private final BookRepository repository = new BookRepository("books");
@@ -17,6 +18,11 @@ public class BookService implements IService<Book>{
     @Override
     public List<Book> findAllWithOffsetAndLimit(int offset, int limit) {
         return repository.findAllWithOffsetAndLimit(offset, limit);
+    }
+
+    @Override
+    public List<Book> findAllWithFilters(Map<String, Object> filters) {
+        return repository.findAllWithFilters(filters);
     }
 
     public List<Book> getDataForDataTable(int start, int length, String[] searchColumns, String searchValue, String orderColumn, String orderDir) {
@@ -65,5 +71,9 @@ public class BookService implements IService<Book>{
     @Override
     public Book findLast() {
         return repository.findLast();
+    }
+
+    public List<Book> search(String query) {
+        return repository.getDataForDataTable(0, 8, new String[]{"title"}, query, "title", "asc");
     }
 }

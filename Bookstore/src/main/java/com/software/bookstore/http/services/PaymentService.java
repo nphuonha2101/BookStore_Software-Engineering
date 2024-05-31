@@ -1,6 +1,7 @@
 package com.software.bookstore.http.services;
 
 import java.util.List;
+import java.util.Map;
 
 import com.software.bookstore.http.models.Payment;
 import com.software.bookstore.http.repositories.PaymentRepository;
@@ -17,6 +18,11 @@ public class PaymentService implements IService<Payment> {
     @Override
     public List<Payment> findAllWithOffsetAndLimit(int offset, int limit) {
         return repository.findAllWithOffsetAndLimit(offset, limit);
+    }
+
+    @Override
+    public List<Payment> findAllWithFilters(Map<String, Object> filters) {
+        return repository.findAllWithFilters(filters);
     }
 
     @Override

@@ -26,11 +26,11 @@
     font-size: 14px;
 }
 
-#searchForm {
+#searchForm, #searchModalForm {
     position: relative;
 }
 
-#searchForm input {
+#searchForm input, #searchModalForm input {
     width: 100%;
     padding: 10px 20px;
     border: none;
@@ -40,7 +40,7 @@
 
 }
 
-#searchForm button.need-absolute {
+#searchForm button.need-absolute, #searchModalForm button.need-absolute {
     background: var(--search-background);
     padding: 0 20px;
     border-radius: 20px;
@@ -49,7 +49,7 @@
     right: 0;
 }
 
-#searchForm button {
+#searchForm button, #searchModalForm button {
     background-color: white;
     height: 100%;
     border: none;
@@ -57,7 +57,7 @@
     transition: all .3s;
 }
 
-#searchForm button:hover {
+#searchForm button:hover, #searchModalForm button:hover {
     background-color: var(--search-background);
 }
 
