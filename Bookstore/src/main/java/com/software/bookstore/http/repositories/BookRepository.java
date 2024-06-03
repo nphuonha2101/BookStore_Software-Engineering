@@ -11,7 +11,6 @@ import java.util.Map;
 
 import com.software.bookstore.core.base.context.AppContext;
 import com.software.bookstore.http.models.Book;
-import com.software.bookstore.http.models.Category;
 
 public class BookRepository extends BaseRepository<Book> {
     public BookRepository(String table) {
