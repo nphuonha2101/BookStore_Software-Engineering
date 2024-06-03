@@ -59,5 +59,14 @@ public class VerifyEmailService implements IService<VerifyEmail> {
         List<VerifyEmail> models = repository.query("SELECT * FROM " + repository.getTable() + " WHERE token = ?", token);
         return models == null || models.isEmpty() ? null : models.get(0);
     }
+
+    public VerifyEmail findByUserId(int userId) {
+        List<VerifyEmail> models = repository.query("SELECT * FROM " + repository.getTable() + " WHERE user_id = ?", userId);
+        return models == null || models.isEmpty() ? null : models.get(0);
+    }
+
+    public boolean deleteByUserId(int userId) {
+        return repository.update("DELETE FROM " + repository.getTable() + " WHERE user_id = ?", userId);
+    }
     
 }

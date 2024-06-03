@@ -18,7 +18,9 @@ import com.software.bookstore.mail.Mail;
 import com.software.bookstore.utils.Dates;
 import com.software.bookstore.utils.Decrypt;
 import com.software.bookstore.utils.Files;
+import com.software.bookstore.utils.Mails;
 import com.software.bookstore.utils.SessionAlert;
+import com.software.bookstore.utils.Strings;
 
 @WebServlet("/auth/register")
 public class RegisterController extends HttpServlet {
@@ -58,9 +60,7 @@ public class RegisterController extends HttpServlet {
                     VerifyEmail verifyEmail = createNewVerifyEmail(user);
                     if(verifyEmail != null) {
                         // send email
-                        String host = Files.env("app.host");
-                        String mailContent = host + "/verify-email?token=" + verifyEmail.getToken();
-                        Mail.sendTo(email, "Email Verification", mailContent, "text/html");
+                        Mails.sendEmailVerification(email, verifyEmail.getToken());
                     }
 
                     SessionAlert.setMessage(session, "Đăng ký tài khoản thành công, vui lòng đăng nhập", "success");
@@ -79,7 +79,7 @@ public class RegisterController extends HttpServlet {
     private VerifyEmail createNewVerifyEmail(User user) {
         VerifyEmail verifyEmail = new VerifyEmail();
         verifyEmail.setEmail(user.getEmail());
-        verifyEmail.setToken(Decrypt.sha256(user.getEmail() + user.getPassword() + System.currentTimeMillis() + ""));
+        verifyEmail.setToken(Strings.getUserToken(user));
         verifyEmail.setExpires(new Timestamp(System.currentTimeMillis() + 3 * 60 * 1000));
         verifyEmail.setUserId(user.getId());
         return verifyEmailService.save(verifyEmail);
