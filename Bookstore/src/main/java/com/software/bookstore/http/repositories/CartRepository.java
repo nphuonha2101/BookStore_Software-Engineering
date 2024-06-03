@@ -38,8 +38,6 @@ public class CartRepository extends BaseRepository<Cart> {
             Cart cart = new Cart();
             cart.setUserId(userId);
             cart = cartService.save(cart);
-
-            System.out.println("CART: " + cart.getId() + " USER: " + cart.getUserId());
             return cart;
         } else {
             return models.get(0);
