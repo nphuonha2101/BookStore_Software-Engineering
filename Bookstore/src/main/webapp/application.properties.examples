@@ -12,3 +12,8 @@ hash.secret=
 
 mail.appName=
 mail.appPassword=
+
+vnp.tmnCode=TFH75I2B
+vnp.returnUrl=http://localhost:8080/payment/vnpay-return
+vnp.hashSecret=VM587FEWV3S2Q050GFLUOBKGOVYWF518
+vnp.url=https://sandbox.vnpayment.vn/paymentv2/vpcpay.html

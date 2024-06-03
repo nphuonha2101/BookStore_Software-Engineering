@@ -1,5 +1,8 @@
 package com.software.bookstore.utils;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -33,5 +36,27 @@ public class Decrypt {
     public static boolean compare(String original, String hashed) {
         String compare = sha256(original);
         return compare.equals(hashed);
+    }
+
+    public static String hmacSha512(String secretKey, String data) {
+        try {
+            Mac mac = Mac.getInstance("HmacSHA512");
+            SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "HmacSHA512");
+            mac.init(secretKeySpec);
+            byte[] digest = mac.doFinal(data.getBytes(StandardCharsets.UTF_8));
+
+            // Convert the digest bytes to a hex string
+            BigInteger bigInt = new BigInteger(1, digest);
+            StringBuilder hexString = new StringBuilder(bigInt.toString(16));
+
+            // Pad with 0s to ensure the hex string has a length of 128
+            while (hexString.length() < 128) {
+                hexString.insert(0, "0");
+            }
+
+            return hexString.toString();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to calculate hmacSHA512", e);
+        }
     }
 }
