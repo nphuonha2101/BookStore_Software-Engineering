@@ -4,6 +4,7 @@
     position: relative;
     padding: 0 !important;
     transition: all 0.3s;
+    box-sizing: border-box !important
 }
 
 .product-card:hover {
@@ -44,4 +45,36 @@
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+}
+
+.product-card .card-title {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: 100%;
+}
+
+@media (min-width: 576px) {
+    .product-grid {
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media (min-width: 768px) {
+    .product-grid {
+        grid-template-columns: 33.33% 33.33% 33.33%;
+    }
+}
+
+@media (min-width: 992px) {
+    .product-grid {
+        grid-template-columns: 25% 25% 25% 25%;
+    }
 }

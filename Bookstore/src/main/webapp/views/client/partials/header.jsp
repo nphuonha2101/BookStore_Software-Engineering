@@ -20,19 +20,19 @@
                 </div>
                 <div class="col-lg-4 col-md-1 col-1">
                     <div class="search">
-                        <form id="searchForm" action="/search" method="get">
+                        <form id="searchForm">
                             <div class="form-group d-lg-block d-none">
                                 <input class="form-control" type="text" name="q"
                                        placeholder="Tìm kiếm các loại sách...">
                                 <button class="need-absolute" type="submit"><i class="fas fa-search"></i></button>
                             </div>
 
-                            <div class="d-lg-none d-block">
-                                <button type="button" class="open-search">
-                                    <i class="fas fa-search"></i>
-                                    <input class="form-control search-absolute" type="text" name="q" placeholder="Tìm kiếm các loại sách..."/>
-                                </button>
-                            </div>
+<%--                            <div class="d-lg-none d-block">--%>
+<%--                                <button type="button" class="open-search">--%>
+<%--                                    <i class="fas fa-search"></i>--%>
+<%--                                    <input class="form-control search-absolute" type="text" name="q" placeholder="Tìm kiếm các loại sách..."/>--%>
+<%--                                </button>--%>
+<%--                            </div>--%>
                         </form>
                     </div>
                 </div>
@@ -142,4 +142,4 @@
     </aside>
 </header>
 
-<script src="/public/js/header.js"></script>
+<script defer type="text/javascript" src="/public/js/header.js"></script>

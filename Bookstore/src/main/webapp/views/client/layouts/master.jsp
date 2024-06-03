@@ -40,5 +40,6 @@
             <jsp:include page="${page}"/>
         </main>
         <%@include file="/views/client/partials/footer.jsp" %>
+        <%@include file="/views/client/partials/search-modal.jsp" %>
     </body>
 </html>

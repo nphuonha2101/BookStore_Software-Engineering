@@ -33,16 +33,16 @@ public abstract class BaseRepository<T> {
             stmt = connection.prepareStatement(query);
             rs = stmt.executeQuery();
             models = new ArrayList<>();
-            while(rs.next())
+            while (rs.next())
                 models.add(mapResultSetToModel(rs));
             return models;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null)
+                if (rs != null)
                     rs.close();
-                if(stmt != null)
+                if (stmt != null)
                     stmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -63,16 +63,69 @@ public abstract class BaseRepository<T> {
             stmt.setInt(2, offset);
             rs = stmt.executeQuery();
             models = new ArrayList<>();
-            while(rs.next())
+            while (rs.next())
                 models.add(mapResultSetToModel(rs));
             return models;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null)
+                if (rs != null)
                     rs.close();
-                if(stmt != null)
+                if (stmt != null)
+                    stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return models;
+    }
+
+    /**
+     * Find all with filters
+     * @param filters Map<String, Object> filters is the conditions to filter the data
+     * @return List<T> models is the list of models that meet the conditions
+     */
+    public List<T> findAllWithFilters(Map<String, Object> filters) {
+        Connection connection = AppContext.getInstance().getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<T> models = null;
+        try {
+            StringBuilder query = new StringBuilder("SELECT * FROM " + table + " WHERE 1=1 ");
+            for (String key : filters.keySet()) {
+                if (filters.get(key) != null) {
+                    if (filters.get(key) instanceof String) {
+                        query.append("AND ").append(key).append(" LIKE ? ");
+                    } else {
+                        query.append("AND ").append(key).append(" = ? ");
+                    }
+                }
+            }
+            stmt = connection.prepareStatement(query.toString());
+            int i = 1;
+            for (String key : filters.keySet()) {
+                if (filters.get(key) != null) {
+                    if (filters.get(key) instanceof String) {
+                        stmt.setString(i++, "%" + filters.get(key) + "%");
+                    } else {
+                        stmt.setObject(i++, filters.get(key));
+                    }
+                }
+            }
+            System.out.println(stmt.toString());
+            rs = stmt.executeQuery();
+            models = new ArrayList<>();
+            while (rs.next())
+                models.add(mapResultSetToModel(rs));
+            return models;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (stmt != null)
                     stmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -110,23 +163,22 @@ public abstract class BaseRepository<T> {
             stmt.setInt(i, start);
             rs = stmt.executeQuery();
             models = new ArrayList<>();
-            while(rs.next())
+            while (rs.next())
                 models.add(mapResultSetToModel(rs));
             return models;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null)
+                if (rs != null)
                     rs.close();
-                if(stmt != null)
+                if (stmt != null)
                     stmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
         return models;
-
     }
 
     public T findById(int id) {
@@ -139,16 +191,16 @@ public abstract class BaseRepository<T> {
             stmt = connection.prepareStatement(query);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
-            if(rs.next())
+            if (rs.next())
                 model = mapResultSetToModel(rs);
             return model;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null)
+                if (rs != null)
                     rs.close();
-                if(stmt != null)
+                if (stmt != null)
                     stmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -168,16 +220,16 @@ public abstract class BaseRepository<T> {
             stmt = connection.prepareStatement(query);
             stmt.setObject(1, count - 1);
             rs = stmt.executeQuery();
-            if(rs.next())
+            if (rs.next())
                 model = mapResultSetToModel(rs);
             return model;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null)
+                if (rs != null)
                     rs.close();
-                if(stmt != null)
+                if (stmt != null)
                     stmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -193,15 +245,15 @@ public abstract class BaseRepository<T> {
         try {
             Map<String, Object> params = mapModelToParams(model);
             String query = "INSERT INTO " + table + " (";
-            for(String key : params.keySet())
+            for (String key : params.keySet())
                 query += key + ", ";
             query = query.substring(0, query.length() - 2) + ") VALUES (";
-            for(int i = 0; i < params.size(); i++)
+            for (int i = 0; i < params.size(); i++)
                 query += "?, ";
             query = query.substring(0, query.length() - 2) + ")";
             stmt = connection.prepareStatement(query);
             int i = 1;
-            for(String key : params.keySet())
+            for (String key : params.keySet())
                 stmt.setObject(i++, params.get(key));
             stmt.executeUpdate();
             model = findLast();
@@ -210,9 +262,9 @@ public abstract class BaseRepository<T> {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null)
+                if (rs != null)
                     rs.close();
-                if(stmt != null)
+                if (stmt != null)
                     stmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -227,12 +279,12 @@ public abstract class BaseRepository<T> {
         try {
             Map<String, Object> params = mapModelToParams(model);
             String query = "UPDATE " + table + " SET ";
-            for(String key : params.keySet())
+            for (String key : params.keySet())
                 query += key + " = ?, ";
             query = query.substring(0, query.length() - 2) + " WHERE id = ?";
             stmt = connection.prepareStatement(query);
             int i = 1;
-            for(String key : params.keySet())
+            for (String key : params.keySet())
                 stmt.setObject(i++, params.get(key));
             stmt.setObject(i, params.get("id"));
             stmt.executeUpdate();
@@ -241,7 +293,7 @@ public abstract class BaseRepository<T> {
             e.printStackTrace();
         } finally {
             try {
-                if(stmt != null)
+                if (stmt != null)
                     stmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -263,7 +315,7 @@ public abstract class BaseRepository<T> {
             e.printStackTrace();
         } finally {
             try {
-                if(stmt != null)
+                if (stmt != null)
                     stmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -288,9 +340,9 @@ public abstract class BaseRepository<T> {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null)
+                if (rs != null)
                     rs.close();
-                if(stmt != null)
+                if (stmt != null)
                     stmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -299,27 +351,27 @@ public abstract class BaseRepository<T> {
         return count;
     }
 
-    public List<T> query(String sql, Object ... params) {
+    public List<T> query(String sql, Object... params) {
         Connection connection = AppContext.getInstance().getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         List<T> models = null;
         try {
             stmt = connection.prepareStatement(sql);
-            for(int i = 0; i < params.length; i++)
+            for (int i = 0; i < params.length; i++)
                 stmt.setObject(i + 1, params[i]);
             rs = stmt.executeQuery();
             models = new ArrayList<>();
-            while(rs.next())
+            while (rs.next())
                 models.add(mapResultSetToModel(rs));
             return models;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                if(rs != null)
+                if (rs != null)
                     rs.close();
-                if(stmt != null)
+                if (stmt != null)
                     stmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -328,12 +380,12 @@ public abstract class BaseRepository<T> {
         return models;
     }
 
-    public boolean update(String sql, Object ... params) {
+    public boolean update(String sql, Object... params) {
         Connection connection = AppContext.getInstance().getConnection();
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(sql);
-            for(int i = 0; i < params.length; i++)
+            for (int i = 0; i < params.length; i++)
                 stmt.setObject(i + 1, params[i]);
             stmt.executeUpdate();
             return true;
@@ -341,7 +393,7 @@ public abstract class BaseRepository<T> {
             e.printStackTrace();
         } finally {
             try {
-                if(stmt != null)
+                if (stmt != null)
                     stmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -351,5 +403,6 @@ public abstract class BaseRepository<T> {
     }
 
     protected abstract T mapResultSetToModel(ResultSet rs) throws SQLException;
+
     protected abstract Map<String, Object> mapModelToParams(T model);
 }

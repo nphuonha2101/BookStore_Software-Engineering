@@ -1,6 +1,7 @@
 package com.software.bookstore.http.services;
 
 import java.util.List;
+import java.util.Map;
 
 import com.software.bookstore.http.models.User;
 import com.software.bookstore.http.repositories.UserRepository;
@@ -17,6 +18,11 @@ public class UserSerivce implements IService<User> {
     @Override
     public List<User> findAllWithOffsetAndLimit(int offset, int limit) {
         return repository.findAllWithOffsetAndLimit(offset, limit);
+    }
+
+    @Override
+    public List<User> findAllWithFilters(Map<String, Object> filters) {
+        return repository.findAllWithFilters(filters);
     }
 
     @Override
