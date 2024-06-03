@@ -14,11 +14,8 @@ import com.software.bookstore.http.models.User;
 import com.software.bookstore.http.models.VerifyEmail;
 import com.software.bookstore.http.services.UserSerivce;
 import com.software.bookstore.http.services.VerifyEmailService;
-import com.software.bookstore.mail.Mail;
 import com.software.bookstore.utils.Dates;
 import com.software.bookstore.utils.Decrypt;
-import com.software.bookstore.utils.Files;
-import com.software.bookstore.utils.Mails;
 import com.software.bookstore.utils.SessionAlert;
 import com.software.bookstore.utils.Strings;
 
@@ -59,12 +56,9 @@ public class RegisterController extends HttpServlet {
                 if(user.getCart() != null) {
                     VerifyEmail verifyEmail = createNewVerifyEmail(user);
                     if(verifyEmail != null) {
-                        // send email
-                        Mails.sendEmailVerification(email, verifyEmail.getToken());
+                        SessionAlert.setMessage(session, "Đăng ký tài khoản thành công, vui lòng đăng nhập", "success");
+                        resp.sendRedirect("/login");
                     }
-
-                    SessionAlert.setMessage(session, "Đăng ký tài khoản thành công, vui lòng đăng nhập", "success");
-                    resp.sendRedirect("/login");
                 } else {
                     session.setAttribute("registerMessage", "Đã có lỗi xảy ra, vui lòng thử lại");
                     resp.sendRedirect("/register");
