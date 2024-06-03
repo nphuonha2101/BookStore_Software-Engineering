@@ -1,6 +1,7 @@
 package com.software.bookstore.http.controllers.auth;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,19 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.software.bookstore.http.models.Cart;
 import com.software.bookstore.http.models.User;
-import com.software.bookstore.http.services.CartService;
+import com.software.bookstore.http.models.VerifyEmail;
 import com.software.bookstore.http.services.UserSerivce;
+import com.software.bookstore.http.services.VerifyEmailService;
+import com.software.bookstore.mail.Mail;
 import com.software.bookstore.utils.Dates;
 import com.software.bookstore.utils.Decrypt;
+import com.software.bookstore.utils.Files;
 import com.software.bookstore.utils.SessionAlert;
 
 @WebServlet("/auth/register")
 public class RegisterController extends HttpServlet {
 
     private final UserSerivce userSerivce = new UserSerivce();
-    private final CartService cartService = new CartService();
+    private final VerifyEmailService verifyEmailService = new VerifyEmailService();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -49,9 +52,17 @@ public class RegisterController extends HttpServlet {
             user.setFullName(fullname);
             user.setAddress(address);
             user.setDob(Dates.toSQLTimestamp(birthday));
-            if(userSerivce.save(user) != null) {
-                Cart createdCart = createNewCart(user);
-                if(createdCart != null) {
+            user = userSerivce.save(user);
+            if(user != null) {
+                if(user.getCart() != null) {
+                    VerifyEmail verifyEmail = createNewVerifyEmail(user);
+                    if(verifyEmail != null) {
+                        // send email
+                        String host = Files.env("app.host");
+                        String mailContent = host + "/verify-email?token=" + verifyEmail.getToken();
+                        Mail.sendTo(email, "Email Verification", mailContent, "text/html");
+                    }
+
                     SessionAlert.setMessage(session, "Đăng ký tài khoản thành công, vui lòng đăng nhập", "success");
                     resp.sendRedirect("/login");
                 } else {
@@ -65,9 +76,12 @@ public class RegisterController extends HttpServlet {
         }
     }
 
-    private Cart createNewCart(User user) {
-        Cart cart = new Cart();
-        cart.setUserId(user.getId());
-        return cartService.save(cart);
+    private VerifyEmail createNewVerifyEmail(User user) {
+        VerifyEmail verifyEmail = new VerifyEmail();
+        verifyEmail.setEmail(user.getEmail());
+        verifyEmail.setToken(Decrypt.sha256(user.getEmail() + user.getPassword() + System.currentTimeMillis() + ""));
+        verifyEmail.setExpires(new Timestamp(System.currentTimeMillis() + 3 * 60 * 1000));
+        verifyEmail.setUserId(user.getId());
+        return verifyEmailService.save(verifyEmail);
     }
 }
