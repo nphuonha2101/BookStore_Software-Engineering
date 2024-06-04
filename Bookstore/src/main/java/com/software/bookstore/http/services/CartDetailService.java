@@ -1,8 +1,8 @@
 package com.software.bookstore.http.services;
 
 import java.util.List;
+import java.util.Map;
 
-import com.software.bookstore.http.models.Book;
 import com.software.bookstore.http.models.CartDetail;
 import com.software.bookstore.http.repositories.CartDetailRepository;
 
@@ -18,6 +18,11 @@ public class CartDetailService implements IService<CartDetail> {
     @Override
     public List<CartDetail> findAllWithOffsetAndLimit(int offset, int limit) {
         return repository.findAllWithOffsetAndLimit(offset, limit);
+    }
+
+    @Override
+    public List<CartDetail> findAllWithFilters(Map<String, Object> filters) {
+        return repository.findAllWithFilters(filters);
     }
 
     @Override

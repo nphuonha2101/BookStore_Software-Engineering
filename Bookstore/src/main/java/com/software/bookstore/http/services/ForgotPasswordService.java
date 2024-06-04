@@ -1,6 +1,7 @@
 package com.software.bookstore.http.services;
 
 import java.util.List;
+import java.util.Map;
 
 import com.software.bookstore.http.models.ForgotPassword;
 import com.software.bookstore.http.repositories.ForgotPasswordRepository;
@@ -17,6 +18,11 @@ public class ForgotPasswordService implements IService<ForgotPassword> {
     @Override
     public List<ForgotPassword> findAllWithOffsetAndLimit(int offset, int limit) {
         return repository.findAllWithOffsetAndLimit(offset, limit);
+    }
+
+    @Override
+    public List<ForgotPassword> findAllWithFilters(Map<String, Object> filters) {
+        return repository.findAllWithFilters(filters);
     }
 
     @Override

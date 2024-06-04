@@ -4,6 +4,7 @@ import com.software.bookstore.http.models.Category;
 import com.software.bookstore.http.repositories.CategoryRepository;
 
 import java.util.List;
+import java.util.Map;
 
 public class CategoryService implements IService<Category>{
     private final CategoryRepository repository = new CategoryRepository("categories");
@@ -16,6 +17,11 @@ public class CategoryService implements IService<Category>{
     @Override
     public List<Category> findAllWithOffsetAndLimit(int offset, int limit) {
         return repository.findAllWithOffsetAndLimit(offset, limit);
+    }
+
+    @Override
+    public List<Category> findAllWithFilters(Map<String, Object> filters) {
+        return repository.findAllWithFilters(filters);
     }
 
     @Override

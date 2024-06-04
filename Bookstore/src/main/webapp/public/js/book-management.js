@@ -21,7 +21,12 @@ $((function () {
                     }).join(", ");
                 }
             },
-            {"data": "price"},
+            {
+                "data": "price",
+                render: function (data, type, row) {
+                    return new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(data);
+                }
+            },
             {"data": "isbn", orderable: false},
             {
                 "data": null,
@@ -114,6 +119,18 @@ $((function () {
         bookModal.show();
     });
 
+    $('#categoriesSelect').on('change', function () {
+        const categoryValuesInput = $('#categoryValues');
+
+        let categoryValues = [];
+        $('#categoriesSelect option:selected').each(function () {
+            categoryValues.push($(this).val());
+        });
+
+        categoryValuesInput.val(categoryValues).join(',');
+        alert(categoryValuesInput.val());
+    })
+
     $('.submit-form-btn').click(function () {
         const formData = new FormData($('#book-form')[0]);
         const method = $('#method').val();
@@ -136,10 +153,10 @@ $((function () {
         });
     });
 
-    $('#img').change(function () {
+    $('#img').on('input', function () {
         let src = $(this).val();
         $('#img-preview').attr('src', src);
-    }, false);
+    });
 
 
 }));

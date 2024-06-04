@@ -2,7 +2,7 @@ db.schema=
 db.url=jdbc:mysql://localhost:3306/bookstore
 db.username=root
 db.password=
-db.driver=
+db.driver=com.mysql.cj.jdbc.Driver
 
 app.version=1.0.0
 app.mode=dev
@@ -12,3 +12,8 @@ hash.secret=
 
 mail.appName=
 mail.appPassword=
+
+vnp.tmnCode=TFH75I2B
+vnp.returnUrl=http://localhost:8080/checkout/vnpay
+vnp.hashSecret=VM587FEWV3S2Q050GFLUOBKGOVYWF518
+vnp.url=https://sandbox.vnpayment.vn/paymentv2/vpcpay.html

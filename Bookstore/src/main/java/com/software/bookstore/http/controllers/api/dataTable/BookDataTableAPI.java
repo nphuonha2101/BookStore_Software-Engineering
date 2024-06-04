@@ -96,7 +96,10 @@ public class BookDataTableAPI extends HttpServlet {
         book.setTitle(updatedBook.getTitle());
         book.setAuthor(updatedBook.getAuthor());
         book.setPublisher(updatedBook.getPublisher());
-        book.setCategories(updatedBook.getCategories());
+
+        if (!updatedBook.getCategories().isEmpty())
+            book.setCategories(updatedBook.getCategories());
+
         book.setImg(updatedBook.getImg());
         book.setIsbn(updatedBook.getIsbn());
         book.setPrice(updatedBook.getPrice());
@@ -123,18 +126,22 @@ public class BookDataTableAPI extends HttpServlet {
         double price = Double.parseDouble(bookData.get("price"));
         String summary = bookData.get("summary");
 
-        System.out.println("summary: " + summary);
+        System.out.println("categories: " + categories);
 
         List<Category> categoryList = new ArrayList<>();
 
-        CategoryService categoryService = new CategoryService();
-        for (String category : categories.split(",")) {
-            int categoryId = Integer.parseInt(category);
-            Category categoryObj = categoryService.findById(categoryId);
-            if (categoryObj != null) {
-                categoryList.add(categoryObj);
+        if (categories != null && !categories.isBlank()) {
+            CategoryService categoryService = new CategoryService();
+            for (String category : categories.split(",")) {
+                int categoryId = Integer.parseInt(category);
+                Category categoryObj = categoryService.findById(categoryId);
+                if (categoryObj != null) {
+                    categoryList.add(categoryObj);
+                }
             }
         }
+
+        System.out.println("Category list: " + categoryList);
 
         Book book = new Book();
         book.setTitle(title);
