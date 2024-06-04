@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.software.bookstore.http.enums.EAccountRole;
 import com.software.bookstore.http.models.User;
 import com.software.bookstore.http.models.VerifyEmail;
 import com.software.bookstore.http.services.UserSerivce;
@@ -51,6 +52,7 @@ public class RegisterController extends HttpServlet {
             user.setFullName(fullname);
             user.setAddress(address);
             user.setDob(Dates.toSQLTimestamp(birthday));
+            user.setRole(EAccountRole.USER);
             user = userSerivce.save(user);
             if(user != null) {
                 if(user.getCart() != null) {

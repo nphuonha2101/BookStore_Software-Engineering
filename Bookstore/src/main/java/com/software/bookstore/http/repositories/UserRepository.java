@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.software.bookstore.http.enums.EAccountRole;
 import com.software.bookstore.http.models.User;
 import com.software.bookstore.http.services.CartService;
 
@@ -25,6 +26,7 @@ public class UserRepository extends BaseRepository<User> {
         user.setAddress(rs.getString("address"));
         user.setDob(rs.getTimestamp("dob"));
         user.setCart(cartService.findByUserId(user.getId()));
+        user.setRole(EAccountRole.valueOf(rs.getString("role")));
         return user;
     }
 
@@ -37,6 +39,7 @@ public class UserRepository extends BaseRepository<User> {
         params.put("full_name", model.getFullName());
         params.put("address", model.getAddress());
         params.put("dob", model.getDob());
+        params.put("role", model.getRole().toString());
         return params;
     }
     
