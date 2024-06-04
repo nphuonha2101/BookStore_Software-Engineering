@@ -2,6 +2,7 @@ package com.software.bookstore.http.models;
 
 import java.sql.Timestamp;
 
+import com.software.bookstore.http.enums.EAccountRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,4 +20,5 @@ public class User {
     private String address;
     private Timestamp dob;
     private Cart cart;
+    private EAccountRole role;
 }

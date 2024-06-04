@@ -35,7 +35,6 @@ public class ProductsController extends HttpServlet {
         // if query is not null, add it to filters
         // query by title
         if (query != null) {
-            productsPage.setTitle("Kết quả tìm kiếm");
             filters.put("title", query);
         }
 
@@ -65,7 +64,7 @@ public class ProductsController extends HttpServlet {
         System.out.println(filters);
         session.setAttribute("productsFilters", filters);
 
-        productsPage.setTitle("Danh sách sản phẩm");
+        productsPage.setTitle("Thư viện");
         Pagination<Book> pagination = new Pagination<>(bookService, 8, req);
         System.out.println(pagination.getPaginatedListWithFilters(filters));
         productsPage.setObject("products", pagination.getPaginatedListWithFilters(filters));
