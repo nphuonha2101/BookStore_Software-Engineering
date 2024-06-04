@@ -21,7 +21,12 @@ $((function () {
                     }).join(", ");
                 }
             },
-            {"data": "price"},
+            {
+                "data": "price",
+                render: function (data, type, row) {
+                    return new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(data);
+                }
+            },
             {"data": "isbn", orderable: false},
             {
                 "data": null,

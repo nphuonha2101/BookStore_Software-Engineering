@@ -96,7 +96,10 @@ public class BookDataTableAPI extends HttpServlet {
         book.setTitle(updatedBook.getTitle());
         book.setAuthor(updatedBook.getAuthor());
         book.setPublisher(updatedBook.getPublisher());
-        book.setCategories(updatedBook.getCategories());
+
+        if (!updatedBook.getCategories().isEmpty())
+            book.setCategories(updatedBook.getCategories());
+
         book.setImg(updatedBook.getImg());
         book.setIsbn(updatedBook.getIsbn());
         book.setPrice(updatedBook.getPrice());
@@ -127,12 +130,14 @@ public class BookDataTableAPI extends HttpServlet {
 
         List<Category> categoryList = new ArrayList<>();
 
-        CategoryService categoryService = new CategoryService();
-        for (String category : categories.split(",")) {
-            int categoryId = Integer.parseInt(category);
-            Category categoryObj = categoryService.findById(categoryId);
-            if (categoryObj != null) {
-                categoryList.add(categoryObj);
+        if (categories != null && !categories.isBlank()) {
+            CategoryService categoryService = new CategoryService();
+            for (String category : categories.split(",")) {
+                int categoryId = Integer.parseInt(category);
+                Category categoryObj = categoryService.findById(categoryId);
+                if (categoryObj != null) {
+                    categoryList.add(categoryObj);
+                }
             }
         }
 
