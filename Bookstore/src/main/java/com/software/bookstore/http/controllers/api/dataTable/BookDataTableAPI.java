@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +56,7 @@ public class BookDataTableAPI extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         FormData formData = new FormData(req);
-        Map<String, String> bookData = formData.getFormFields(List.of("title", "author", "publisher", "categories", "img", "isbn", "price", "summary"));
+        Map<String, String> bookData = formData.getFormFields(Arrays.asList("title", "author", "publisher", "categories", "img", "isbn", "price", "summary"));
 
         Book book = getBookFromFormData(bookData);
 
@@ -82,7 +83,7 @@ public class BookDataTableAPI extends HttpServlet {
 
 
     private void doPatch(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        List<String> patchFields = List.of("id", "title", "author", "publisher", "categories", "img", "isbn", "price", "summary");
+        List<String> patchFields = Arrays.asList("id", "title", "author", "publisher", "categories", "img", "isbn", "price", "summary");
         FormData formData = new FormData(req);
         Map<String, String> bookData = formData.getFormFields(patchFields);
 
@@ -130,7 +131,7 @@ public class BookDataTableAPI extends HttpServlet {
 
         List<Category> categoryList = new ArrayList<>();
 
-        if (categories != null && !categories.isBlank()) {
+        if (categories != null && !categories.isEmpty()) {
             CategoryService categoryService = new CategoryService();
             for (String category : categories.split(",")) {
                 int categoryId = Integer.parseInt(category);
