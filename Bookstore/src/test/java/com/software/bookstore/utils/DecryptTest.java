@@ -36,10 +36,21 @@ public class DecryptTest {
 
     @Test
     public void testCompare() {
+        String input = "hashme";
+        String hash = "hashed";
+        PowerMockito.when(Decrypt.compare(input, hash)).thenReturn(true);
+        boolean actual = Decrypt.compare(input, hash);
+        assertEquals(true, actual);
     }
 
     @Test
     public void testHmacSha512() {
+        String input = "hashme";
+        String expected = "hashed";
+        String secretKey = "secret";
+        PowerMockito.when(Decrypt.hmacSha512(secretKey, input)).thenReturn(expected);
+        String actual = Decrypt.hmacSha512(secretKey, input);
+        assertEquals(expected, actual);
     }
     
 }

@@ -5,6 +5,9 @@
 package com.software.bookstore.utils;
 
 import org.junit.Test;
+
+import com.software.bookstore.constants.CPage;
+
 import static org.junit.Assert.*;
 
 /**
@@ -16,20 +19,32 @@ public class PagesTest {
     public PagesTest() {
     }
 
-    @org.junit.Test
+    @Test
     public void testGetClientLayoutDir() {
+        String actual = Pages.getClientLayoutDir();
+        String expected = CPage.CLIENT_LAYOUT_DIR;
+        assertEquals(expected, actual);
     }
 
-    @org.junit.Test
+    @Test
     public void testGetAdminLayoutDir() {
+        String actual = Pages.getAdminLayoutDir();
+        String expected = CPage.ADMIN_LAYOUT_DIR;
+        assertEquals(expected, actual);
     }
 
-    @org.junit.Test
+    @Test
     public void testGetAdminPageDir() {
+        String actual = Pages.getAdminPageDir();
+        String expected = CPage.ADMIN_PAGE_DIR;
+        assertEquals(expected, actual);
     }
 
-    @org.junit.Test
+    @Test
     public void testGetClientPageDir() {
+        String actual = Pages.getClientPageDir();
+        String expected = CPage.CLIENT_PAGE_DIR;
+        assertEquals(expected, actual);
     }
     
 }

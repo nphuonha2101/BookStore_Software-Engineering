@@ -21,13 +21,17 @@ public class Pagination<T> {
         this.limit = limit;
     }
 
+    public int getTotalPages() {
+        return (int) Math.ceil((double) service.count() / limit);
+    }
+
     /**
      * To get paginated list of items from the database with the given limit
      *
      * @return a list of items
      */
     public List<T> getPaginatedList() {
-        totalPages = (int) Math.ceil((double) service.count() / limit);
+        totalPages = getTotalPages();
         int offset = handlePagination();
         return service.findAllWithOffsetAndLimit(offset, limit);
     }

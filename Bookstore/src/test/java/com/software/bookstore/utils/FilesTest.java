@@ -5,19 +5,34 @@
 package com.software.bookstore.utils;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
 import static org.junit.Assert.*;
+
+import org.junit.Before;
 
 /**
  *
  * @author thang
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({Files.class})
 public class FilesTest {
     
-    public FilesTest() {
+    @Before
+    public void setUp() {
+        PowerMockito.mockStatic(Files.class);
     }
 
-    @org.junit.Test
+    @Test
     public void testEnv() {
+        String expected = "http://localhost:8080";
+        PowerMockito.when(Files.env("app.host")).thenReturn(expected);
+        String actual = Files.env("app.host");
+        assertEquals(expected, actual);
     }
     
 }

@@ -4,6 +4,8 @@ import com.software.bookstore.utils.Decrypt;
 import com.software.bookstore.utils.Files;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
@@ -94,8 +96,9 @@ public class VNPay {
     /**
      * Get payment URL from vnp_Params
      * @return payment URL
+     * @throws UnsupportedEncodingException 
      */
-    public String getPaymentURL() {
+    public String getPaymentURL() throws UnsupportedEncodingException {
         List<String> fieldNames = new ArrayList<>(vnp_Params.keySet());
         Collections.sort(fieldNames);
         StringBuilder hashData = new StringBuilder();
@@ -108,11 +111,11 @@ public class VNPay {
                 //Build hash data
                 hashData.append(fieldName);
                 hashData.append('=');
-                hashData.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII));
+                hashData.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.name()));
                 //Build query
-                query.append(URLEncoder.encode(fieldName, StandardCharsets.US_ASCII));
+                query.append(URLEncoder.encode(fieldName, StandardCharsets.US_ASCII.name()));
                 query.append('=');
-                query.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII));
+                query.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.name()));
                 if (itr.hasNext()) {
                     query.append('&');
                     hashData.append('&');
